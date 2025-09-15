@@ -1,0 +1,9 @@
+.select-box-ui-qr-ling {
+    option {
+        background-color: black;
+    }
+}
+
+.travelv-btns:hover {
+    background-color: rgb(247, 247, 247) !important;
+}

@@ -1,0 +1,95 @@
+import { useLocation, useNavigate } from 'react-router-dom'
+import './header.css'
+import { useEffect, useState } from 'react';
+import { ChevronDown, LogOut, Search } from 'lucide-react';
+import { logout } from '../../services/AccountService';
+import TextField from '../ui/TextField';
+
+
+function Header() {
+    const nav = useNavigate();
+    const location = useLocation();
+    const [tab, setTab] = useState('home')
+    const [userData, setUserData] = useState({
+        username: "",
+        email: ""
+    })
+    const [isAtTop, setIsAtTop] = useState(true);
+    const [isHomePage, setIsHomePage] = useState(true);
+
+    useEffect(()=>{
+        setIsHomePage(location.pathname === '/')
+    },[location])
+    useEffect(() => {
+        const mainLayout = document.querySelector('.main-container');
+        const onScroll = () => {
+            if (isHomePage) {
+                setIsAtTop((mainLayout.scrollTop < 200));
+            }
+        };
+        mainLayout.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
+    useEffect(() => {
+        const username = window.localStorage.getItem("alex_account_username");
+        const email = window.localStorage.getItem("alex_account_email");
+        if (username) {
+            setUserData({ username: username, email: email });
+        }
+    }, [])
+    return (<>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Travel V</title>
+        <header className={`header-container ${isAtTop && isHomePage? "nav-top" : "nav-scrolled"}`}>
+            <div className="header-left">
+                <a href="/" className="logoname">TRAVEL V</a>
+                <nav className='header-menu'>
+                    <a onClick={() => nav('/')} className={tab == 'home' && 'active'}>Home</a>
+                    <a onClick={() => nav('/locations')} className={tab == 'locations' && 'active'}>Locations</a>
+                    <a onClick={() => nav('/blogs')} className={tab == 'blogs' && 'active'}>Blogs</a>
+                    <a href="#" className={tab == 'version' && 'active'}>Tutorial</a>
+                    <a href="#" className={tab == 'compare' && 'active'}>About</a>
+                </nav>
+
+            </div>
+            <div>
+                <TextField
+                    iconLeft={<Search color='rgba(85, 85, 85, 1)' />}
+                    borderRadius={50}
+                    placeholder={'search tour, locate, service'}
+                />
+            </div>
+            <div className="header-right">
+                <div className="language-selector">
+                    <i className="fas fa-globe"></i>
+                    <span>EN</span>
+                    <i className="fas fa-chevron-down"></i>
+                </div>
+                {userData.username == "" ? <div onClick={() => {
+                    nav('/signin')
+                }} className="user-icon">
+                    Sign in
+                </div> :
+                    <div className='user-menu-select'>
+                        <div>
+                            <div className='user-username'>{userData.username}</div>
+                            <div className='user-email'>{userData.email}</div>
+                        </div>
+                        <div><ChevronDown /></div>
+                        <div className='user-dropboxs'>
+                            <div className='user-dropbox-box' onClick={() => logout()}><LogOut color='#CCC'/> Log out</div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </header>
+    </>)
+}
+export default Header

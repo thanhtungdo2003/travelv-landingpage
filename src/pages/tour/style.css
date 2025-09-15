@@ -1,0 +1,254 @@
+.tour-thumbnails {
+    width: 100%;
+    display: flex;
+    height: 65vh;
+}
+
+.main-thumbnail {
+    width: 50%;
+    height: 100%;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 2px solid white;
+    }
+}
+
+.more-thumbnails {
+    width: 50%;
+    display: grid;
+    grid-template-columns: auto auto;
+    height: 100%;
+
+    img {
+        width: 100%;
+        height: 32.3333vh;
+        border: 2px solid white;
+        object-fit: cover;
+    }
+}
+
+.tour__content {
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    gap: 10px;
+}
+
+.tour-info {
+    flex: 3;
+    background-color: white;
+    padding: 10px;
+}
+
+.tour-summary-container {
+    flex: 1;
+}
+
+.tour__title {
+    font-size: 30px;
+}
+
+.tour__description {
+    width: 100%;
+    font-size: 14px;
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    transition-duration: 0.2s;
+}
+
+.tour-des-content {
+    width: 100%;
+    padding: 10px;
+}
+
+.tour-des-content.hide {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tour-des-content.show {
+    .tour-des-showmore-btn {
+        background: none;
+    }
+}
+
+
+.tour-des-showmore-btn {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.812));
+    bottom: 0px;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(254, 254, 254, 0.482));
+    }
+}
+
+.summary__box {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+    position: sticky;
+    top: 100px;
+}
+
+.summary-infos {
+    display: grid;
+    font-size: 12px;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 3px solid #DDD;
+}
+
+.summary__btns {
+    padding: 10px;
+    display: flex;
+}
+
+.summary-price {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
+
+    span {
+        font-size: 20px;
+        color: rgb(66, 148, 180);
+    }
+}
+
+.tour__options {
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    gap: 20px;
+
+}
+
+.tour__option-start-location {
+    flex: 2;
+}
+
+.tour__option-mappicker {
+    flex: 3;
+}
+
+.tour__travel-itinerary-container {
+    width: 100%;
+    min-height: 500px;
+    position: relative;
+    background: url('../../../public/langbac-about.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(203, 203, 203, 0.999);
+    display: grid;
+    align-items: center;
+    img {
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.travel-itinerarys {
+    width: 100%;
+    background-color: #0000007b;
+    padding: 30px;
+}
+
+.travel-itinerary {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    border-left: 2px dashed white;
+
+}
+
+.tour__line-ver-item {
+    position: relative;
+    width: 0px;
+    height: 100%;
+}
+
+.tour__line-ver-item::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 9px;
+    height: 9px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+}
+
+
+
+.tour__line-hor-item {
+    position: relative;
+    width: 50px;
+    height: 0px;
+    border-top: 2px dashed white;
+
+}
+
+.tour__line-hor-item::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 9px;
+    height: 9px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+}
+
+.travel-itinerary-content {
+    font-size: 14px;
+    color: white;
+    margin-left: 10px;
+    width: 80%;
+}
+
+.travel-itinerary__desciption {
+    font-weight: 550;
+    cursor: pointer;
+}
+
+.travel-itinerary__infos {
+    transition-duration: 0.2s;
+}
+
+.travel-itinerary__infos.hide {
+    height: 0px;
+    overflow: hidden;
+    transition-duration: 0.2s;
+
+}
+
+.travel-itinerary__infos.show {
+    height: 200px;
+    transition-duration: 0.2s;
+    
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.309);
+}

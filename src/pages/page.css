@@ -1,0 +1,552 @@
+.curvy-section {
+    height: 100vh;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+
+    &>div {
+        background-color: #00000014;
+        padding: 50px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
+
+.top-slide {
+    justify-content: center;
+    background: url('../../public/halong.jpg') no-repeat center/cover;
+    -webkit-clip-path: ellipse(75% 70% at 80% 40%);
+    clip-path: ellipse(80% 69% at 40% 31%);
+}
+
+.hot-tour {
+    clip-path: url(#wave);
+    background: url('../../public/ruong_bac_thang.jpg') no-repeat center/cover;
+    position: absolute;
+    cursor: pointer;
+
+    &>div {
+        position: absolute;
+        right: 30px;
+        transition-duration: 0.3s;
+    }
+
+    &:hover {
+        &>div {
+            backdrop-filter: blur(10px);
+        }
+    }
+}
+
+.show-more-container {
+    width: 400px;
+}
+
+.location-outstanding {
+    background: url('../../public/bavang-about.jpg') no-repeat center/cover;
+    display: flex;
+
+    &>div {
+        transition-duration: 0.3s;
+        cursor: pointer;
+
+        h1 {
+            font-size: 35px;
+        }
+    }
+
+    &>div:hover {
+        backdrop-filter: blur(10px);
+    }
+}
+
+
+.about-travel-vietnam {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+.about-travel-vietnam-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px;
+
+    h1 {
+        font-size: 35px;
+    }
+
+    p {
+        text-align: justify;
+        font-size: 14px;
+        text-justify: inter-word;
+        width: 100%;
+    }
+}
+
+.about-travel-vietnam-imgs {
+    width: 1000px;
+    background-color: #f6f6f6;
+    display: flex;
+    flex-wrap: wrap;
+
+    img {
+        object-fit: cover;
+    }
+}
+
+.hot-tour-section {
+    display: flex;
+    position: relative;
+}
+
+.hot-tours-container {
+    width: 66%;
+    padding: 50px;
+    height: 100%;
+    position: relative;
+
+    .hot-tours-sorted {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        gap: 10px;
+        select {
+            font-weight: 550;
+        }
+    }
+
+    .hot-tours {
+        display: flex;
+        gap: 10px;
+
+        width: 100%;
+    }
+}
+
+.outstanding-container {
+    width: 75%;
+    padding: 50px;
+    height: 100%;
+
+    .outstanding-sorted {
+        height: 50px;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        gap: 10px;
+
+        select {
+            font-weight: 550;
+        }
+    }
+
+    .outstanding-cards {
+        display: flex;
+        gap: 10px;
+
+        width: 100%;
+    }
+}
+
+
+
+.container-page {
+    min-height: 100vh;
+    margin-top: 90px;
+}
+
+
+.tabmenu-container {
+    display: flex;
+    height: 50px;
+    align-items: center;
+
+    .tabmenu {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        height: 50px;
+        cursor: pointer;
+    }
+
+    .tabmenu.on {
+        background-color: #2a2a2a;
+        border-bottom: 5px solid #a94442;
+    }
+
+    border-bottom: 1px solid rgb(89, 89, 89);
+}
+
+.upload-container {
+    width: 100%;
+    padding: 10px;
+    height: 120px;
+}
+
+.upload-zone {
+    width: 100%;
+    height: 100%;
+    background-color: #232323;
+    border-radius: 20px;
+    border: 4px dashed rgb(67, 67, 67);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.ql-editor {
+    min-height: 100px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.qr-lock-particle {
+    background: linear-gradient(90deg, black, red, black);
+    position: absolute;
+    top: 50%;
+    height: 3px;
+    width: 100vw;
+    animation: qr-lock-line-animation 2.6s infinite;
+}
+
+@keyframes qr-lock-line-animation {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.qr-lock-icon {
+    font-size: 100px;
+    color: #a94442;
+    text-shadow: 0px 0px 100px #ffa5a48f;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.qr-lock-title {
+    font-size: 17px;
+    margin: 0px auto;
+    display: flex;
+    text-align: center;
+    width: 100%;
+    justify-content: center;
+    color: #b9b9b9;
+}
+
+.login-page {
+    background: url('../../public/bacson-about.jpg');
+}
+
+.login-with-otherapp-btns{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    label{
+        font-size: 12px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.218);
+    }
+}
+
+.login-with-google-btn {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    justify-content: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    gap: 0.75rem;
+    color: rgb(59, 59, 59);
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all .6s ease;
+}
+
+.login-with-google-btn svg {
+    height: 24px;
+}
+
+.login-with-google-btn:hover {
+    background-color: rgb(224, 224, 224);
+}
+
+.login-with-facebook-btn {
+  cursor: pointer;
+  color: rgb(252, 252, 252); /* text-zinc-200 */
+  display: flex;
+  gap: 0.5rem; /* gap-2 */
+  align-items: center;
+  background-color: rgb(37, 99, 235); /* bg-blue-600 */
+  padding-left: 1rem;  /* px-4 */
+  padding-right: 1rem;
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem;
+  border-radius: 0.5rem; /* rounded-lg */
+  font-weight: 500; /* font-medium */
+  font-size: 13px; /* text-sm */
+  transition: all 0.2s ease-in; /* transition-all ease-in duration-200 */
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+  svg{
+    width: 24px;
+    fill: white;
+  }
+}
+
+.login-with-facebook-btn:hover {
+  background-color: rgb(29, 78, 216); /* hover:bg-blue-700 */
+}
+
+
+.signin-form-container {
+    height: 100vh;
+    width: 24%;
+    background-color: rgba(255, 255, 255, 0.429);
+    backdrop-filter: blur(20px);
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.115);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signin-form {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.signin-form-header {
+    height: 50px;
+    color: rgb(36, 36, 36);
+
+}
+
+.signin-form-title {
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.sign-form-btns {
+    width: 100%;
+    display: flex;
+}
+
+.sign-about-page {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+
+    .icon {
+        font-size: 120px;
+        color: #ffffff;
+        display: flex;
+        position: relative;
+
+        .link {
+            margin-top: -50px;
+            cursor: pointer;
+        }
+    }
+
+    .about {
+        font-size: 14px;
+        color: rgb(216, 216, 216);
+    }
+}
+
+.sign-nav-container {
+    width: 100%;
+    display: flex;
+    background-color: #0707070f;
+    color: white;
+    margin: 20px auto;
+    height: 30px;
+    padding: 8px;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    strong {
+        cursor: pointer;
+        color: rgb(40, 113, 176);
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.verify-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(2);
+}
+
+.verify-loading svg polyline {
+
+    fill: none;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.verify-loading svg polyline#back {
+    fill: none;
+    stroke: #e0464b33;
+}
+
+.verify-loading svg polyline#front {
+    fill: none;
+    stroke: #d2494b;
+    stroke-dasharray: 48, 144;
+    stroke-dashoffset: 192;
+    animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+    72.5% {
+        opacity: 0;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/*============================[BLOG]======================================*/
+
+.blogs-page {
+    display: flex;
+    padding: 50px;
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.blogs-container {
+    flex: 5;
+
+}
+
+.best-blogs-container {
+    flex: 2;
+}
+
+.blogs-box-title {
+    width: 100%;
+    border-bottom: 3px solid #b34747;
+    color: white;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.box-title {
+    width: 100%;
+}
+
+
+.main-contents-box {
+    display: flex;
+    width: 100%;
+    padding: 30px;
+    gap: 20px;
+}
+
+.filter-container {
+    width: 35%;
+
+}
+
+.filter-box {
+    width: 100%;
+    position: sticky;
+    top: 100px;
+    font-size: 13px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.064);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+
+}
+
+select {
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #CCC;
+    padding: 10px;
+    font-size: 12px !important;
+}
+
+.option-label {
+    font-weight: 550;
+}
+
+.name-of-box {
+    font-size: large;
+    font-weight: 550;
+}
+
+.box-items {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    grid-template-columns: auto auto auto auto;
+}
+
+.filter-option-elements {
+    display: grid;
+    gap: 5px;
+}
+
+.filter-btns {
+    width: 100%;
+    display: flex;
+}

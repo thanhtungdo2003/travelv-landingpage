@@ -1,0 +1,195 @@
+.locations-page {
+    color: black;
+    gap: 20px;
+}
+
+.outstanding-box {
+    margin-top: 100px;
+    padding: 30px;
+}
+
+.box-title {
+    width: 100%;
+    font-size: 20px;
+    border-bottom: 3px solid rgb(47, 131, 176);
+}
+
+.categories-box {
+    width: 100%;
+    height: 75vh;
+    position: relative;
+}
+
+.location-image-box {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+
+    img {
+        height: 100vh;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    gap: 10px;
+    position: absolute;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.15);
+    bottom: -100px;
+}
+
+
+.category-choosed-name {
+    position: absolute;
+    top: 44%;
+    transform: translateY(-50%);
+    color: white;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.293);
+    padding: 50px;
+
+    h1 {
+        letter-spacing: 10px;
+        text-align: center;
+        font-size: 65px;
+    }
+
+    span {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-size: 20px;
+    }
+}
+
+.category-checkbox {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../../../public/category-pattern.jpg') no-repeat center/contain;
+    cursor: pointer;
+}
+
+.category-checkbox-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 130px;
+    background-color: rgb(189, 62, 62);
+    border-radius: 50%;
+    border: 3px solid rgb(254, 160, 45);
+}
+
+.category-name {
+
+    font-size: 11px;
+    font-weight: 550;
+    color: white;
+}
+
+.categories-image {
+    img {
+        width: 100%;
+        height: 75vh;
+        object-fit: cover;
+    }
+}
+
+
+
+.tour-cate-slide-container {
+    width: 100%;
+    display: flex;
+    padding: 50px;
+    height: 500px;
+
+    .tour-categories {
+        flex: 4;
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 10px;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+
+        .category-checkbox {
+            width: 200px;
+            height: 200px;
+        }
+    }
+
+    .tour-cate-slide {
+        flex: 5;
+        height: 100%;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    }
+}
+
+.destination__description-box {
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.destination__description {
+    width: 60%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.104);
+    padding: 30px;
+
+    p {
+        font-size: 14px;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .___title {
+        font-size: 16px;
+        font-weight: 550;
+        border-bottom: 2px solid #386284;
+        padding: 10px;
+        width: 100%;
+        color: #386284;
+
+    }
+}
+
+.destination__comments {
+
+    width: 40%;
+    background-color: white;
+
+    border-radius: 10px;
+    box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.104);
+    padding: 30px;
+
+    .___title {
+        font-size: 16px;
+        font-weight: 550;
+        border-bottom: 2px solid #386284;
+        color: #386284;
+        padding: 10px;
+        width: 100%;
+    }
+}

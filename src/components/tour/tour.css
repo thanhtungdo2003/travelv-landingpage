@@ -1,0 +1,101 @@
+.tour-card {
+    height: 450px;
+    position: relative;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.248);
+    border-radius: 5px;
+    overflow: hidden;
+    transition-duration: 0.3s;
+}
+
+.tour-card:hover {
+    .tour-card-image {
+        transform: scale(1.1);
+    }
+}
+
+.tour-card-image {
+    transition-duration: 0.3s;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tour-card-content {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    padding: 10px;
+    background-color: rgba(87, 87, 87, 0.451);
+    backdrop-filter: blur(15px);
+    box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.277);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.tour-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tour-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(230, 230, 230);
+}
+
+.tour-segment-label {
+    padding: 10px;
+    color: white;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(58, 120, 151, 0.38);
+    font-size: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.tour-header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: rgb(243, 243, 243);
+
+    &>div {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+    }
+}
+
+.tour-title {
+    font-size: 14px;
+    display: -webkit-box;
+    font-weight: 500;
+    white-space: nowarp;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tour-description {
+    font-size: 13px;
+    color: rgb(220, 220, 220);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

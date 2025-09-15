@@ -1,0 +1,130 @@
+.booking-steps {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    align-items: center;
+}
+
+.b__step {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(158, 158, 158);
+    color: rgb(218, 218, 218);
+    font-size: 14px;
+}
+
+.b__step.active {
+    background-color: rgb(73, 130, 179);
+
+}
+
+.b__step-line {
+    width: 150px;
+    height: 0px;
+    border-top: 3px dashed #CCC;
+}
+
+.booking-main-container {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    padding: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.booking-main-info {
+    width: 55vw;
+    background-color: white;
+    padding: 30px;
+    display: grid;
+
+    span {
+        font-size: 14px;
+        font-weight: 550;
+    }
+}
+
+.booking-main-summary-container {
+    width: 35vw;
+    position: relative;
+}
+
+
+.booking-info__contact {
+    width: 100%;
+
+    .__contact-form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .__contact-form> :nth-child(3) {
+        grid-column: 1 / span 2;
+    }
+}
+
+.__passenger-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.__passenger-quantity-container {
+    width: 100%;
+}
+
+.__passenger-quantity-box {
+    display: flex;
+    border-radius: 5px;
+    height: 50px;
+    padding: 10px;
+    align-items: center;
+    border: 1px solid #CCC;
+}
+
+.__info__passenger-box {
+    display: grid;
+    grid-template-columns: 1fr 6fr 4fr;
+    border: 1px solid rgb(155, 155, 155);
+    border-radius: 10px;
+    padding: 10px;
+    gap: 10px;
+    margin: 10px auto;
+
+    .___index {
+        display: flex;
+        align-items: center;
+        font-size: 13px;
+        justify-content: center;
+        border-right: 1px dashed rgb(98, 98, 98);
+    }
+
+    .___fullname {
+        border-right: 1px dashed rgb(104, 104, 104);
+    }
+}
+
+
+.___detail-item{
+    display: flex;
+    padding: 0px 10px 4px 0px;
+    justify-content: space-between;
+    label{
+        font-weight: 550;
+        font-size: 11px;
+        color: #787878;
+    }
+    span{
+        font-size: 13px;
+        font-weight: 550;
+    }
+}
