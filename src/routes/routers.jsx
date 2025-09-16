@@ -17,7 +17,7 @@ import BookingPage from "../pages/booking/BookingPage";
 import { TourProvider } from "../contexts/tourcontext";
 const AppRouter = () => {
   return (
-    <Router>
+    <Router basename="/travelv-landingpage">
       <Routes>
         <Route path="/" element={<GenQrProvider><MainLayout /></GenQrProvider>}>
           <Route index element={<TourProvider><Home /></TourProvider>} />
