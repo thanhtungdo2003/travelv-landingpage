@@ -10,19 +10,20 @@ import MapPicker from "../../components/Map";
 import { useNavigate, useParams } from "react-router-dom"
 import api from "../../cores/axios";
 import { toast } from "react-toastify";
-import { formatEstimatedTime } from "../../services/utils";
+import { formatDate, formatEstimatedTime } from "../../services/utils";
 export default function TourDetail() {
     const nav = useNavigate();
     const { id } = useParams();
     const [thisTour, setThisTour] = useState(undefined)
     const [provinces, setProvince] = useState([])
     const [wards, setWards] = useState([])
-    const [tourOptions, setTourOptions] = useState({
+    const [bookingsInfo, setBookingsInfo] = useState({
         province: '',
         ward: '',
-        startDate: '',
         address: '',
-        phone: ''
+        diparture_at: formatDate(new Date()),
+        lat: null,
+        lng: null
     })
     const [statesInfo, setStatesInfo] = useState({
         priceInclude: false,
@@ -52,9 +53,9 @@ export default function TourDetail() {
     }, [])
 
     useEffect(() => {
-        const province = provinces.find(e => e.codename == tourOptions.province)
+        const province = provinces.find(e => e.codename == bookingsInfo.province)
         setWards(province?.wards)
-    }, [tourOptions.province])
+    }, [bookingsInfo.province])
 
     return (<>
         <head><title>{`${thisTour?.title}`}</title></head>
@@ -88,13 +89,9 @@ export default function TourDetail() {
                         <div className="tour__options">
                             <div className="tour__option-start-location">
                                 <label style={{ fontSize: 13, fontWeight: 550 }}>Start address</label>
-                                <TextField label={'Phone nummber'}
-                                    placeholder={'Phone number'}
-                                    borderRadius={5}
-                                />
                                 <label>Province</label>
-                                <select value={tourOptions.province} onChange={(e) => {
-                                    setTourOptions({ ...tourOptions, province: e.target.value });
+                                <select value={bookingsInfo.province} onChange={(e) => {
+                                    setBookingsInfo({ ...bookingsInfo, province: e.target.value });
                                 }}>
                                     <option >-- Choose your province --</option>
                                     {provinces.map((e) => {
@@ -102,7 +99,11 @@ export default function TourDetail() {
                                     })}
                                 </select>
                                 <label>Ward</label>
-                                <select>
+                                <select value={bookingsInfo.ward} onChange={(e) => {
+                                    setBookingsInfo({ ...bookingsInfo, ward: e.target.value });
+                                }}>
+                                    <option >-- Choose your ward --</option>
+
                                     {wards?.map((e) => {
                                         return <option value={e.codename}>{e.name}</option>
                                     })}
@@ -110,11 +111,19 @@ export default function TourDetail() {
                                 <TextField label={'Specific address'}
                                     placeholder={'Home number, lane number,...'}
                                     borderRadius={5}
+                                    value={bookingsInfo.address}
+                                    onChange={(e) => {
+                                        setBookingsInfo({ ...bookingsInfo, address: e.target.value });
+                                    }}
                                 />
                                 <TextField label={'Start date'}
                                     type={'date'}
                                     min={new Date().toISOString().split('T')[0]}
                                     borderRadius={5}
+                                    value={bookingsInfo.diparture_at}
+                                    onChange={(e) => {
+                                        setBookingsInfo({ ...bookingsInfo, diparture_at: formatDate(e.target.value) });
+                                    }}
                                 />
                             </div>
                             <div className="tour__option-mappicker">
@@ -203,11 +212,17 @@ export default function TourDetail() {
                             </div>
                             <div className="summary__btns">
                                 <Button value={'Next to booking'}
+                                    disable={
+                                        bookingsInfo.address == "" ||
+                                        bookingsInfo.province == "" ||
+                                        bookingsInfo.ward == "" ||
+                                        !bookingsInfo.diparture_at
+                                    }
                                     border={'1px solid #5e9cb8ff'}
                                     backgroundColor={'#ecececff'}
                                     iconRight={<MoveRight color="#5e9cb8ff" />}
                                     onClick={() => {
-                                        nav(`/booking/${id}`)
+                                        nav(`/booking/${id}`, { state: bookingsInfo })
                                     }}
                                 />
                             </div>

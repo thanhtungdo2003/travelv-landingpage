@@ -27,3 +27,10 @@ export function formatEstimatedTime(value) {
     return ''
   }
 }
+export function formatDate(raw) {
+    try {
+        return new Date(raw).toISOString().split('T')[0];
+    } catch {
+        return new Date().toISOString().split('T')[0];
+    }
+}

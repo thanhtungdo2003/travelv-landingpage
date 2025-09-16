@@ -16,7 +16,7 @@ import api from "../../cores/axios";
 export default function BookingPage() {
     const location = useLocation();
     const [thisTour, setThisTour] = useState(undefined)
-
+    const bookingsInfo = location.state;
     const { id } = useParams();
 
     const [bookingsData, setBookingsData] = useState({
@@ -27,8 +27,30 @@ export default function BookingPage() {
         amountOfChildren: 0,
         amountOfBaby: 0
     })
+    const [bookingsForm, setBookingsForm] = useState({
+        fullname: "",
+        email: "",
+        phone: "",
+        user_id: "",
+        tour_id: "",
+        province: "",
+        ward: "",
+        specific_address: "",
+        pickup_lat: null,
+        pickup_lng: null,
+        diparture_at: new Date().toISOString(),
+        passengers: [
+            {
+                fullname: "",
+                age_type: "",
+                bookings_id: "",
+                birth_day: new Date().toISOString(),
+            },
+        ],
+    })
 
     useEffect(() => {
+        console.log(bookingsInfo)
         api.post('/v1/tours/get', {
             id: id,
             searchKeyword: '',
@@ -125,17 +147,23 @@ export default function BookingPage() {
                     <div className="booking-info__contact">
                         <span>Contact infomations</span>
                         <div className="__contact-form">
-                            <TextField label={'Fullname'} placeholder={'Your fullname'} />
+                            <TextField label={'Fullname'} placeholder={'Your fullname'}
+                                value={bookingsForm.fullname}
+                                onChange={(e) => setBookingsForm({ ...bookingsForm, fullname: e.target.value })}
+                            />
                             <div>
                                 <label>Phone</label>
                                 <PhoneInput
                                     country={'vn'}
-                                    value={bookingsData.phone}
-                                    onChange={(value) => setBookingsData({ ...bookingsData, phone: value })}
+                                    value={bookingsForm.phone}
+                                    onChange={(value) => setBookingsForm({ ...bookingsForm, phone: value })}
                                     inputStyle={{ width: '100%' }}
                                 />
                             </div>
-                            <TextField label={'Email'} placeholder={'Your email, gmail'} />
+                            <TextField label={'Email'} placeholder={'Your email, gmail'}
+                                value={bookingsForm.email}
+                                onChange={(e) => setBookingsForm({ ...bookingsForm, email: e.target.value })}
+                            />
                         </div>
                     </div>
                     <div className="booking-info__passenger">
