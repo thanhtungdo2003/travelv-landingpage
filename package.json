@@ -1,5 +1,6 @@
 {
   "name": "frontend",
+  "homepage": "https://username.github.io/travelv-landingpage",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
