@@ -1,5 +1,5 @@
 import { ArrowLeft, CheckCircle, FormInput, Info, Minus, Plus, Wallet } from "lucide-react";
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Button from "../../components/ui/Button";
 import './style.css'
 import '../page.css'
@@ -10,7 +10,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getPassDateByYear } from "../../services/utils";
+import { formatDate, getPassDateByYear } from "../../services/utils";
 import api from "../../cores/axios";
 
 export default function BookingPage() {
@@ -18,11 +18,9 @@ export default function BookingPage() {
     const [thisTour, setThisTour] = useState(undefined)
     const bookingsInfo = location.state;
     const { id } = useParams();
+    const nav = useNavigate();
 
     const [bookingsData, setBookingsData] = useState({
-        email: '',
-        phone: '',
-        fullname: '',
         amountOfAdult: 1,
         amountOfChildren: 0,
         amountOfBaby: 0
@@ -42,15 +40,15 @@ export default function BookingPage() {
         passengers: [
             {
                 fullname: "",
-                age_type: "",
-                bookings_id: "",
+                age_type: "Adult",
                 birth_day: new Date().toISOString(),
             },
         ],
     })
 
     useEffect(() => {
-        console.log(bookingsInfo)
+        const account_id = window.localStorage.getItem('account_id');
+        setBookingsForm({ ...bookingsForm, ...bookingsInfo, user_id: account_id, tour_id: id });
         api.post('/v1/tours/get', {
             id: id,
             searchKeyword: '',
@@ -64,57 +62,79 @@ export default function BookingPage() {
     }, [])
 
     const increasePassenger = (type) => {
-        const totalPassenger = Number(bookingsData.amountOfAdult) + Number(bookingsData.amountOfChildren) + Number(bookingsData.amountOfBaby)
+        const totalPassenger = Number(bookingsForm.passengers.length)
         if (totalPassenger == thisTour?.slots) {
             return toast.info('slot limit reached!')
         }
-        if (type == 'adult') {
-            setBookingsData(prev => ({
+        if (type == 'Adult') {
+            setBookingsForm(prev => ({
                 ...prev,
-                amountOfAdult: prev.amountOfAdult + 1
+                passengers: [...bookingsForm.passengers, {
+                    fullname: "",
+                    age_type: "Adult",
+                    birth_day: undefined,
+                }]
             }));
-        } else if (type == 'children') {
-            setBookingsData(prev => ({
+        } else if (type == 'Children') {
+            setBookingsForm(prev => ({
                 ...prev,
-                amountOfChildren: prev.amountOfChildren + 1
+                passengers: [...bookingsForm.passengers, {
+                    fullname: "",
+                    age_type: "Children",
+                    birth_day: undefined,
+                }]
             }));
-        } else if (type == 'baby') {
-            setBookingsData(prev => ({
+        } else if (type == 'Baby') {
+            setBookingsForm(prev => ({
                 ...prev,
-                amountOfBaby: prev.amountOfBaby + 1
+                passengers: [...bookingsForm.passengers, {
+                    fullname: "",
+                    age_type: 'Baby',
+                    birth_day: undefined,
+                }]
             }));
         }
     }
 
     const decreasePassenger = (type) => {
-        const totalPassenger = Number(bookingsData.amountOfAdult) + Number(bookingsData.amountOfChildren) + Number(bookingsData.amountOfBaby)
+        const totalPassenger = Number(bookingsForm.passengers.length)
+        let agetype = '';
         if (totalPassenger == 1) {
             return toast.info('The total number of passengers cannot be zero!')
         }
-        if (type == 'adult') {
-            if (bookingsData.amountOfAdult == 0) {
+        if (type == 'Adult') {
+            if (bookingsForm.passengers.filter(p => p.age_type === "Adult").length == 0) {
                 return toast.info('The number of this passengers cannot be negative!')
             }
-            setBookingsData(prev => ({
-                ...prev,
-                amountOfAdult: prev.amountOfAdult - 1
-            }));
-        } else if (type == 'children') {
-            if (bookingsData.amountOfChildren == 0) {
+            agetype = 'Adult';
+        } else if (type == 'Children') {
+            if (bookingsForm.passengers.filter(p => p.age_type === "Children").length == 0) {
                 return toast.info('The number of this passengers cannot be negative!')
             }
-            setBookingsData(prev => ({
-                ...prev,
-                amountOfChildren: prev.amountOfChildren - 1
-            }));
-        } else if (type == 'baby') {
-            if (bookingsData.amountOfBaby == 0) {
+            agetype = 'Children';
+        } else if (type == 'Baby') {
+            if (bookingsForm.passengers.filter(p => p.age_type === 'Baby').length == 0) {
                 return toast.info('The number of this passengers cannot be negative!')
             }
-            setBookingsData(prev => ({
+            agetype = 'Baby';
+        }
+        setBookingsForm(prev => {
+            const index = prev.passengers.findIndex(p => p.age_type === agetype);
+            if (index === -1) return prev;
+            return {
                 ...prev,
-                amountOfBaby: prev.amountOfBaby - 1
-            }));
+                passengers: prev.passengers.filter((_, i) => i !== index),
+            };
+        });
+    }
+    const getPassDateByType = (type) => {
+        switch (type) {
+            case 'Adult':
+                return { min: getPassDateByYear(100), max: getPassDateByYear(13) };
+            case 'Children':
+                return { min: getPassDateByYear(13), max: getPassDateByYear(3) };
+            case 'Baby':
+                return { min: getPassDateByYear(3), max: getPassDateByYear(0) };
         }
     }
     return (<>
@@ -172,57 +192,79 @@ export default function BookingPage() {
                             <div className="__passenger-quantity-container">
                                 <label>People 13 and up years old ({'>='} 13)</label>
                                 <div className="__passenger-quantity-box">
-                                    <Button iconLeft={<Minus color="#666" />} flex={1} onClick={() => decreasePassenger('adult')} />
-                                    <TextField border={'none'} flex={1} value={bookingsData.amountOfAdult} textAlign="center" labelError={'none'} label={'none'} />
-                                    <Button iconLeft={<Plus color="#666" />} flex={1} onClick={() => increasePassenger('adult')} />
+                                    <Button iconLeft={<Minus color="#666" />} flex={1} onClick={() => decreasePassenger('Adult')} />
+                                    <TextField border={'none'} flex={1} value={bookingsForm.passengers.filter(p => p.age_type === "Adult").length} textAlign="center" labelError={'none'} label={'none'} />
+                                    <Button iconLeft={<Plus color="#666" />} flex={1} onClick={() => increasePassenger('Adult')} />
                                 </div>
                             </div>
                             <div className="__passenger-quantity-container">
                                 <label>People less than 13 and greater 3 years old ({'<'} 13 & {'>'}3)</label>
                                 <div className="__passenger-quantity-box">
-                                    <Button iconLeft={<Minus color="#666" />} flex={1} onClick={() => decreasePassenger('children')} />
-                                    <TextField border={'none'} flex={1} value={bookingsData.amountOfChildren} textAlign="center" labelError={'none'} label={'none'} />
-                                    <Button iconLeft={<Plus color="#666" />} flex={1} onClick={() => increasePassenger('children')} />
+                                    <Button iconLeft={<Minus color="#666" />} flex={1} onClick={() => decreasePassenger('Children')} />
+                                    <TextField border={'none'} flex={1} value={bookingsForm.passengers.filter(p => p.age_type === "Children").length} textAlign="center" labelError={'none'} label={'none'} />
+                                    <Button iconLeft={<Plus color="#666" />} flex={1} onClick={() => increasePassenger('Children')} />
                                 </div>
                             </div><div className="__passenger-quantity-container">
                                 <label>People less than 3 years old ({'<'} 3)</label>
                                 <div className="__passenger-quantity-box">
-                                    <Button iconLeft={<Minus color="#666" />} flex={1} onClick={() => decreasePassenger('baby')} />
-                                    <TextField border={'none'} flex={1} value={bookingsData.amountOfBaby} textAlign="center" labelError={'none'} label={'none'} />
-                                    <Button iconLeft={<Plus color="#666" />} flex={1} onClick={() => increasePassenger('baby')} />
+                                    <Button iconLeft={<Minus color="#666" />} flex={1} onClick={() => decreasePassenger('Baby')} />
+                                    <TextField border={'none'} flex={1} value={bookingsForm.passengers.filter(p => p.age_type === 'Baby').length} textAlign="center" labelError={'none'} label={'none'} />
+                                    <Button iconLeft={<Plus color="#666" />} flex={1} onClick={() => increasePassenger('Baby')} />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="booking-info__passenger">
                         <span>Passengers info</span>
+
                         <div>
-                            {bookingsData.amountOfAdult > 0 ? <label><strong>Peoples 13 and up years old ({'>='} 13)</strong></label> : <></>}
-                            {[...Array(bookingsData.amountOfAdult)].map((_, i) => (
+                            {bookingsForm.passengers.map((p, i) => (
                                 <div key={i} className="__info__passenger-box">
                                     <div className="___index">{i}</div>
-                                    <div className="___fullname"><TextField label={'Fullname'} border={'none'} placeholder={'Fullname of passenger'} /></div>
-                                    <div><TextField type={'date'} max={getPassDateByYear(13)} label={'Birth day'} border={'none'} /></div>
-                                </div>
-                            ))}
-                        </div>
-                        <div>
-                            {bookingsData.amountOfChildren > 0 ? <label><strong>Peoples less than 13 and greater 3 years old ({'<'} 13 & {'>'}3)</strong></label> : <></>}
-                            {[...Array(bookingsData.amountOfChildren)].map((_, i) => (
-                                <div key={i} className="__info__passenger-box">
-                                    <div className="___index">{i}</div>
-                                    <div className="___fullname"><TextField label={'Fullname'} border={'none'} placeholder={'Fullname of passenger'} /></div>
-                                    <div><TextField type={'date'} max={getPassDateByYear(3)} min={getPassDateByYear(13)} label={'Birth day'} border={'none'} /></div>
-                                </div>
-                            ))}
-                        </div>
-                        <div>
-                            {bookingsData.amountOfBaby > 0 ? <label><strong>Peoples less than 3 years old ({'<'} 3)</strong></label> : <></>}
-                            {[...Array(bookingsData.amountOfBaby)].map((_, i) => (
-                                <div key={i} className="__info__passenger-box">
-                                    <div className="___index">{i}</div>
-                                    <div className="___fullname"><TextField label={'Fullname'} border={'none'} placeholder={'Fullname of passenger'} /></div>
-                                    <div><TextField type={'date'} max={getPassDateByYear(0)} min={getPassDateByYear(3)} label={'Birth day'} border={'none'} /></div>
+                                    <div className="___fullname"><TextField label={'Fullname'} border={'none'} placeholder={'Fullname of passenger'}
+                                        value={p.fullname}
+                                        onChange={(e) =>
+                                            setBookingsForm(prev => ({
+                                                ...prev,
+                                                passengers: prev.passengers.map((passenger, idx) =>
+                                                    idx === i
+                                                        ? { ...passenger, fullname: e.target.value }
+                                                        : passenger
+                                                ),
+                                            }))
+                                        }
+                                    /></div>
+                                    <div className="___passenger-type">
+                                        <select value={p.age_type}
+                                            onChange={(e) =>
+                                                setBookingsForm(prev => ({
+                                                    ...prev,
+                                                    passengers: prev.passengers.map((passenger, idx) =>
+                                                        idx === i
+                                                            ? { ...passenger, age_type: e.target.value }
+                                                            : passenger
+                                                    ),
+                                                }))
+                                            }
+                                        >
+                                            <option value={'Adult'}>Adult</option>
+                                            <option value={'Children'}>Children</option>
+                                            <option value={'Baby'}>Baby</option>
+                                        </select>
+                                    </div>
+                                    <div><TextField type={'date'} min={getPassDateByType(p.age_type)?.min} max={getPassDateByType(p.age_type)?.max} label={'Birth day'} border={'none'}
+                                        value={p.birth_day}
+                                        onChange={(e) =>
+                                            setBookingsForm(prev => ({
+                                                ...prev,
+                                                passengers: prev.passengers.map((passenger, idx) =>
+                                                    idx === i
+                                                        ? { ...passenger, birth_day: formatDate(e.target.value) }
+                                                        : passenger
+                                                ),
+                                            }))
+                                        }
+                                    /></div>
                                 </div>
                             ))}
                         </div>
@@ -230,10 +272,23 @@ export default function BookingPage() {
                 </div>
                 <div className="booking-main-summary-container">
                     <BookingSummary
-                        amountOfAdult={bookingsData.amountOfAdult}
-                        amountOfBaby={bookingsData.amountOfBaby}
-                        amountOfChildren={bookingsData.amountOfChildren}
+                        amountOfAdult={bookingsForm.passengers.filter(p => p.age_type == 'Adult').length}
+                        amountOfBaby={bookingsForm.passengers.filter(p => p.age_type == 'Baby').length}
+                        amountOfChildren={bookingsForm.passengers.filter(p => p.age_type == 'Children').length}
                         tour={thisTour}
+                        hasEmail={bookingsForm.email != ''}
+                        hasPhone={bookingsForm.phone != ''}
+                        hasName={bookingsForm.fullname != ''}
+                        onCheckOut={() => {
+                            console.log(bookingsForm)
+                            api.post('/v1/bookings/create', bookingsForm).then((res) => {
+                                if (res?.data?.id){
+                                    nav(`/payment/${res?.data?.id}`)
+                                }
+                            }).catch((err) => {
+                                toast.error(err.status)
+                            })
+                        }}
                     />
                 </div>
             </div>

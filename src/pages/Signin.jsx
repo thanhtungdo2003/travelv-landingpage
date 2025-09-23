@@ -67,9 +67,9 @@ export default function SigninPage() {
                                 if (res.access_token) {
                                     toast.success(`Welcome ${res.user_name}`)
                                     setTokenCookie(res.access_token, 20);
-                                    window.localStorage.setItem('alex_account_username', res.user_name);
-                                    window.localStorage.setItem('alex_account_email', res.email);
-                                    window.localStorage.setItem('alex_account_id', res.user_id);
+                                    window.localStorage.setItem('account_username', res.user_name);
+                                    window.localStorage.setItem('account_email', res.email);
+                                    window.localStorage.setItem('account_id', res.user_id);
                                     nav('/');
                                 } else {
                                     toast.error(res.status + " " + res.response?.data?.detail)

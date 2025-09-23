@@ -29,7 +29,7 @@ export default function SignUpPage() {
                 email: "",
                 password: "",
                 repassword: "",
-                username: window.localStorage.getItem('alex_account_username')
+                username: window.localStorage.getItem('account_username')
             })
         }
     }, [])

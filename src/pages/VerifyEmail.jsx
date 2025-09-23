@@ -17,9 +17,9 @@ export default function VerifyEmailPage() {
                         nav('/');
                     }
                     setTokenCookie(res.data.access_token, 20);
-                    window.localStorage.setItem('alex_account_username', res.data.user_name);
-                    window.localStorage.setItem('alex_account_email', res.data.email);
-                    window.localStorage.setItem('alex_account_id', res.data.user_id);
+                    window.localStorage.setItem('account_username', res.data.user_name);
+                    window.localStorage.setItem('account_email', res.data.email);
+                    window.localStorage.setItem('account_id', res.data.user_id);
                     nav('/signup?verify=1');
                 } catch (err) {
                     nav('/');

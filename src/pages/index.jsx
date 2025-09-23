@@ -8,6 +8,8 @@ import useTour from '../contexts/tourcontext';
 import api from '../cores/axios';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
+import OutstandingTours from '../components/tour/OutstandingTours';
+import OutstandingDestinations from '../components/location/OutstandingDestination';
 
 function Home() {
     const nav = useNavigate();
@@ -70,33 +72,10 @@ function Home() {
             </div>
         </div>
         <section className="home-section hot-tour-section">
-            <div className='hot-tours-container'>
-                <div className='hot-tours-sorted'>
-                    <label>Sort by</label>
-                    <div>
-                        <select>
-                            <option>Date</option>
-                            <option>Month</option>
-                            <option>Year</option>
-                        </select>
-                    </div>
-                </div>
-                <div className='hot-tours'>
-                    {tours?.map((e, i) => {
-                        return <TourCard title={e.title}
-                            description={e.description}
-                            imageSrc={e.thumbnailURL}
-                            location={e.destination.title}
-                            vehicle={e.vehicle}
-                            price={e.price}
-                            views={e.views}
-                            segment={e.tag}
-                            time={e.estimated_time}
-                            id={e.id}
-                        />
-                    })}
-                </div>
+            <div style={{width:"70%"}}>
+                <OutstandingTours />
             </div>
+
             <div class="curvy-section hot-tour">
                 <svg xmlns="http://www.w3.org/2000/svg">
                     <clipPath id="wave" clipPathUnits="objectBoundingBox">
@@ -119,37 +98,13 @@ function Home() {
         </section>
         <section className="home-section">
             <div class="curvy-section location-outstanding">
-
                 <div className='show-more-container'>
                     <h4>{'>'} See all</h4>
                     <h1>Featured Destinations</h1>
                     <p>Most popular destinations.</p>
                 </div>
-                <div className='outstanding-container'>
-                    <div className='outstanding-sorted'>
-                        <label>Sort by</label>
-                        <select>
-                            <option>Date</option>
-                            <option>Month</option>
-                            <option>Year</option>
-                        </select>
-                    </div>
-                    <div className='outstanding-cards'>
-                        {bestDestinations?.map((e, i) => {
-                            return <LocationCard title={e.title}
-                                description={e.description}
-                                imageSrc={e.thumbnailURL}
-                                location={e.destination_id}
-                                vehicle={e.vehicle}
-                                price={e.price}
-                                views={e.views}
-                                segment={e.tag}
-                                tourAmount={1}
-                                time={e.estimated_time}
-                                id={e.id}
-                            />
-                        })}
-                    </div>
+                <div style={{width:'100%'}}>
+                    <OutstandingDestinations/>
                 </div>
             </div>
 

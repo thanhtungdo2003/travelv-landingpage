@@ -9,6 +9,8 @@ import TextField from "../../components/ui/TextField";
 import api from "../../cores/axios";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import OutstandingTours from "../../components/tour/OutstandingTours";
+import PageInput from "../../components/ui/PageInput";
 export default function LocationDetail() {
     const { id } = useParams();
     const [tours, setTours] = useState(undefined);
@@ -21,7 +23,15 @@ export default function LocationDetail() {
         depatureDate: new Date().toISOString().split('T')[0],
     });
     const [provinces, setProvince] = useState([])
-
+    const [filterTours, setFilterTours] = useState({
+        page: 1,
+        row: 4,
+        searchKeyword: '',
+        id: '',
+        priceFrom: 0,
+        priceTo: 1000000000
+    });
+    const [priceFilterIndex, setPriceFilterIndex] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,17 +52,15 @@ export default function LocationDetail() {
             toast.error(err?.status)
         });
 
-        api.post('/v1/tours/get', {
-            id: '',
-            searchKeyword: '',
-            page: 1,
-            row: 10
-        }).then((res) => {
-            setTours(res.data?.data)
+
+    }, [])
+    useEffect(() => {
+        api.post(`/v1/tours/get-by-destination/${id}`, filterTours).then((res) => {
+            setTours(res.data)
         }).catch((err) => {
             toast.error(err?.status)
         })
-    }, [])
+    }, [filterTours, filterData])
     return (<>
         <div className="container-page">
             <div className="locations-page">
@@ -107,22 +115,46 @@ export default function LocationDetail() {
                                 <div className="option-label">Finance</div>
                                 <div className="filter-option-elements">
                                     <Button value={'From 1000.000đ to 5000.000đ'}
-                                        border={'1px solid #CCC'}
+                                        border={priceFilterIndex == 0 ? '2px solid #4f9dd1ff' : '1px solid #CCC'}
+                                        onClick={() => {
+                                            setFilterTours({ ...filterTours, priceFrom: 1000000, priceTo: 5000000 });
+                                            setPriceFilterIndex(0);
+                                        }}
                                     />
                                     <Button value={'From 5000.000đ to 10.000.000đ'}
-                                        border={'1px solid #CCC'}
+                                        border={priceFilterIndex == 1 ? '2px solid #4f9dd1ff' : '1px solid #CCC'}
+                                        onClick={() => {
+                                            setFilterTours({ ...filterTours, priceFrom: 5000000, priceTo: 10000000 });
+                                            setPriceFilterIndex(1);
+                                        }}
                                     />
                                     <Button value={'From 10.000.000đ to 15.000.000đ'}
-                                        border={'1px solid #CCC'}
+                                        border={priceFilterIndex == 2 ? '2px solid #4f9dd1ff' : '1px solid #CCC'}
+                                        onClick={() => {
+                                            setFilterTours({ ...filterTours, priceFrom: 10000000, priceTo: 15000000 });
+                                            setPriceFilterIndex(2);
+                                        }}
                                     />
                                     <Button value={'From 15.000.000đ to 20.000.000đ'}
-                                        border={'1px solid #CCC'}
+                                        border={priceFilterIndex == 3 ? '2px solid #4f9dd1ff' : '1px solid #CCC'}
+                                        onClick={() => {
+                                            setFilterTours({ ...filterTours, priceFrom: 15000000, priceTo: 20000000 });
+                                            setPriceFilterIndex(3);
+                                        }}
                                     />
                                     <Button value={'From 25.000.000đ to 30.000.000đ'}
-                                        border={'1px solid #CCC'}
+                                        border={priceFilterIndex == 4 ? '2px solid #4f9dd1ff' : '1px solid #CCC'}
+                                        onClick={() => {
+                                            setFilterTours({ ...filterTours, priceFrom: 25000000, priceTo: 30000000 });
+                                            setPriceFilterIndex(4);
+                                        }}
                                     />
                                     <Button value={'Over 30.000.000đ'}
-                                        border={'1px solid #CCC'}
+                                        border={priceFilterIndex == 5 ? '2px solid #4f9dd1ff' : '1px solid #CCC'}
+                                        onClick={() => {
+                                            setFilterTours({ ...filterTours, priceFrom: 30000000, priceTo: 1000000000 });
+                                            setPriceFilterIndex(5);
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -156,7 +188,10 @@ export default function LocationDetail() {
                             </div>
                             <div className="filter-options">
                                 <div className="filter-btns">
-                                    <Button value={'Clear'} color={'red'} />
+                                    <Button value={'Clear'} color={'red'} onClick={() => {
+                                        setFilterTours({ ...filterTours, priceFrom: 0, priceTo: 1000000000 });
+                                        setPriceFilterIndex(undefined)
+                                    }} />
                                     <Button value={'Apply'} />
                                 </div>
                             </div>
@@ -166,8 +201,8 @@ export default function LocationDetail() {
                         <div className="box-header">
                             <div className="box-title">Tour recommended for you</div>
                         </div>
-                        <div className="box-items" style={{ gridTemplateColumns: "auto auto" }}>
-                            {tours?.map((e, i) => {
+                        <div className="box-items" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+                            {tours?.data?.map((e, i) => {
                                 return <TourCard title={e.title}
                                     description={e.description}
                                     imageSrc={e.thumbnailURL}
@@ -181,7 +216,16 @@ export default function LocationDetail() {
                                 />
                             })}
                         </div>
+
+                        <div style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center", gap: "10px" }}>
+                            <PageInput page={1} onChange={(value) => {
+                                setFilterTours(prev => ({ ...prev, page: value }))
+                            }}
+                                max={tours?.max_page}
+                            />
+                        </div>
                     </div>
+
                 </div>
                 <div className="destination__description-box">
                     <div className='destination__description'>
@@ -192,46 +236,8 @@ export default function LocationDetail() {
                         <label htmlFor="" className='___title'>Comments</label>
                     </div>
                 </div>
-                <div className="outstanding-box">
-                    <div className="box-header">
-                        <div className="box-title">Locations Outstanding</div>
-                        <div className='sorted'>
-                            <label>Sort by</label>
-                            <select>
-                                <option>Date</option>
-                                <option>Month</option>
-                                <option>Year</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="box-items">
-                        <LocationCard title={'Ha Long'}
-                            description={'3 vé trải nghiệm dịch vụ đẳng cấp tại Vịnh Hạ Long'}
-                            imageSrc={'/halong.jpg'}
-                            tourAmount={3}
-                            views={3456546}
-                        />
-                        <LocationCard title={'Lang Ho Chu Tich'}
-                            description={'Viếng thăm lăng Bác là một trong những hoạt động cần thiết nhất khi đến với Hà Nội'}
-                            imageSrc={'/langbac-about.jpg'}
-                            tourAmount={3}
-                            views={7324234}
-
-                        />
-                        <LocationCard title={'Bac Son'}
-                            description={'Dịch vụ đẳng cấp cùng trải nghiệm mới mẻ và cảm giác hòa mình cùng thiên nhiên, cuộc sống bình dị tại Bắc Sơn, được đắm chìm vào phong cảnh hùng vĩ nhưng đầy thơ mộng được dệt nên bởi những thuở rộng bậc thang, và cánh cò trắng muốt'}
-                            imageSrc={'/bacson-about.jpg'}
-                            tourAmount={3}
-                            views={324234}
-                        />
-                        <LocationCard title={'Bac Son'}
-                            description={'Dịch vụ đẳng cấp cùng trải nghiệm mới mẻ và cảm giác hòa mình cùng thiên nhiên, cuộc sống bình dị tại Bắc Sơn, được đắm chìm vào phong cảnh hùng vĩ nhưng đầy thơ mộng được dệt nên bởi những thuở rộng bậc thang, và cánh cò trắng muốt'}
-                            imageSrc={'/bacson-about.jpg'}
-                            tourAmount={3}
-                            views={324234}
-
-                        />
-                    </div>
+                <div style={{ width: "100%" }}>
+                    <OutstandingTours row={4} />
                 </div>
             </div>
         </div>

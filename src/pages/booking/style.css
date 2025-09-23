@@ -93,7 +93,7 @@
 
 .__info__passenger-box {
     display: grid;
-    grid-template-columns: 1fr 6fr 4fr;
+    grid-template-columns: 1fr 6fr 2fr 3fr;
     border: 1px solid rgb(155, 155, 155);
     border-radius: 10px;
     padding: 10px;
@@ -111,19 +111,27 @@
     .___fullname {
         border-right: 1px dashed rgb(104, 104, 104);
     }
+
+    .___passenger-type {
+        font-size: 13px;
+        border-right: 1px dashed rgb(98, 98, 98);
+        padding: 10px;
+    }
 }
 
 
-.___detail-item{
+.___detail-item {
     display: flex;
     padding: 0px 10px 4px 0px;
     justify-content: space-between;
-    label{
+
+    label {
         font-weight: 550;
         font-size: 11px;
         color: #787878;
     }
-    span{
+
+    span {
         font-size: 13px;
         font-weight: 550;
     }

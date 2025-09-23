@@ -2,71 +2,77 @@ import React from 'react';
 import styled from 'styled-components';
 
 const BookingSummary = ({
-    amountOfAdult = 0,
-    amountOfChildren = 0,
-    amountOfBaby = 0,
-    amountOfSingleRoom = 0,
-    amountOfSuite = 0,
-    tour
+  hasEmail = false,
+  hasPhone = false,
+  hasName = false,
+  amountOfAdult = 0,
+  amountOfChildren = 0,
+  amountOfBaby = 0,
+  amountOfSingleRoom = 0,
+  amountOfSuite = 0,
+  tour,
+  onCheckOut
 }) => {
-    const getSubtotal = () => {
-        try {
-            return Number((tour?.price * (amountOfAdult) + ((tour?.price * 0.8) * amountOfChildren)))
-        } catch {
-            return NaN
-        }
+  const getSubtotal = () => {
+    try {
+      return Number((tour?.price * (amountOfAdult) + ((tour?.price * 0.8) * amountOfChildren)))
+    } catch {
+      return NaN
     }
-    return (
-        <StyledWrapper style={{
-            position: "sticky",
-            top: 100
-        }}>
-            <div className="master-container">
-                <div className="tour-summary-card cart">
-                    <label className="title">Your cart</label>
-                    <div className="tour___infos">
-                        <div className="tour-info___primary">
-                            <img src={tour?.thumbnailURL} />
-                            <div className='___title'>
-                                <span>{tour?.title}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="tour-summary-card bill">
-                    <label className="title">Detail</label>
-                    <div style={{ padding: "10px" }}>
-                        <div className='___detail-item'><label>Price / person:</label><span>{tour?.price.toLocaleString()}đ</span></div>
-                        <div className='___detail-item'><label>Amount of adult:</label><span>{amountOfAdult}</span></div>
-                        <div className='___detail-item'><label>Amount of children (discount 20%):</label><span>{amountOfChildren}</span></div>
-                        <div className='___detail-item'><label>Amount of baby (free):</label><span>{amountOfBaby}</span></div>
-                        <div className='___detail-item'><label>Amount of single room:</label><span>{amountOfSingleRoom}</span></div>
-                        <div className='___detail-item'><label>Amount of suite:</label><span>{amountOfSuite}</span></div>
-                    </div>
-                </div>
-                <div className="tour-summary-card coupons">
-                    <label className="title">Apply coupons</label>
-                    <form className="form">
-                        <input type="text" placeholder="Apply your coupons here" className="input_field" />
-                        <button>Apply</button>
-                    </form>
-                </div>
-                <div className="tour-summary-card checkout">
-                    <label className="title">Checkout</label>
-                    <div className="details">
-                        <span>Subtotal:</span>
-                        <span>{getSubtotal().toLocaleString()}đ</span>
-                        <span>Discount through applied coupons:</span>
-                        <span>0đ</span>
-                    </div>
-                    <div className="checkout--footer">
-                        <label className="price"><sup>VND</sup>{getSubtotal().toLocaleString()}</label>
-                        <button className="checkout-btn">Checkout</button>
-                    </div>
-                </div>
+  }
+  return (
+    <StyledWrapper style={{
+      position: "sticky",
+      top: 100
+    }}>
+      <div className="master-container">
+        <div className="tour-summary-card cart">
+          <label className="title">Your cart</label>
+          <div className="tour___infos">
+            <div className="tour-info___primary">
+              <img src={tour?.thumbnailURL} />
+              <div className='___title'>
+                <span>{tour?.title}</span>
+              </div>
             </div>
-        </StyledWrapper>
-    );
+          </div>
+        </div>
+        <div className="tour-summary-card bill">
+          <label className="title">Detail</label>
+          <div style={{ padding: "10px" }}>
+            <div className='___detail-item'><label>Price / person:</label><span>{tour?.price.toLocaleString()}đ</span></div>
+            <div className='___detail-item'><label>Amount of adult:</label><span>{amountOfAdult}</span></div>
+            <div className='___detail-item'><label>Amount of children (discount 20%):</label><span>{amountOfChildren}</span></div>
+            <div className='___detail-item'><label>Amount of baby (free):</label><span>{amountOfBaby}</span></div>
+            <div className='___detail-item'><label>Amount of single room:</label><span>{amountOfSingleRoom}</span></div>
+            <div className='___detail-item'><label>Amount of suite:</label><span>{amountOfSuite}</span></div>
+          </div>
+        </div>
+        <div className="tour-summary-card coupons">
+          <label className="title">Apply coupons</label>
+          <form className="form">
+            <input type="text" placeholder="Apply your coupons here" className="input_field" />
+            <button>Apply</button>
+          </form>
+        </div>
+        <div className="tour-summary-card checkout">
+          <label className="title">Checkout</label>
+          <div className="details">
+            <span>Subtotal:</span>
+            <span>{getSubtotal().toLocaleString()}đ</span>
+            <span>Discount through applied coupons:</span>
+            <span>0đ</span>
+          </div>
+          <div className="checkout--footer">
+            <label className="price"><sup>VND</sup>{getSubtotal().toLocaleString()}</label>
+            <button className={`checkout-btn ${!hasEmail || !hasName || !hasPhone ? 'off' : 'on'}`} onClick={onCheckOut}
+              disabled={!hasEmail || !hasName || !hasPhone}
+            >{!hasEmail || !hasName || !hasPhone ? 'Fill in all infomations' : 'Next to payment'}</button>
+          </div>
+        </div>
+      </div>
+    </StyledWrapper>
+  );
 }
 
 const StyledWrapper = styled.div`
@@ -257,15 +263,25 @@ const StyledWrapper = styled.div`
     align-items: center;
     width: 150px;
     height: 36px;
-    background: linear-gradient(180deg, #4480FF 0%, #115DFC 50%, #0550ED 100%);
     box-shadow: 0px 0.5px 0.5px #EFEFEF, 0px 1px 0.5px rgba(239, 239, 239, 0.5);
     border-radius: 7px;
     border: 0;
     outline: none;
-    color: #ffffff;
-    font-size: 13px;
+    font-sirgba(13, 12, 12, 1)x;
     font-weight: 600;
     transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-  }`;
+    font-size: 13px
+  }
+  .checkout .checkout-btn.on {
+    background: linear-gradient(180deg, #4480FF 0%, #115DFC 50%, #0550ED 100%);
+    color: #ffffff;
+  }
+  .checkout .checkout-btn.off {
+    background: linear-gradient(180deg, #818a9dff 0%, #7f889cff 50%, #8990a0ff 100%);
+    color: #ffffff;
+  }
+  `
+  
+  ;
 
 export default BookingSummary;

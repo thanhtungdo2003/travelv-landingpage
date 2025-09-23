@@ -71,11 +71,11 @@ export const isEmail = (email) => {
 };
 export const logout = () => {
   deleteTokenCookie();
-  window.localStorage.removeItem('alex_account_email');
-  window.localStorage.removeItem('alex_account_username');
-  window.localStorage.removeItem('alex_account_id');
+  window.localStorage.removeItem('account_email');
+  window.localStorage.removeItem('account_username');
+  window.localStorage.removeItem('account_id');
   setTimeout(() => {
-    window.location.reload();
+    window.open('/', '_parent')
   }, 200);
 }
 
@@ -84,15 +84,15 @@ export function setTokenCookie(token, days = 1) {
   const date = new Date();
   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
   const expires = "expires=" + date.toUTCString();
-  document.cookie = `alex_access_token=${token}; ${expires}; path=/; Secure; SameSite=Strict`;
+  document.cookie = `access_token=${token}; ${expires}; path=/; Secure; SameSite=Strict`;
 }
 
 export function deleteTokenCookie() {
-  document.cookie = "alex_access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
+  document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Secure; SameSite=Strict";
 }
 
 export function getTokenCookie() {
-  const name = "alex_access_token=";
+  const name = "access_token=";
   const decodedCookie = decodeURIComponent(document.cookie);
   const cookies = decodedCookie.split(';');
   for (let c of cookies) {

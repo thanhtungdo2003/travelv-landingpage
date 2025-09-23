@@ -1,15 +1,17 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import './header.css'
 import { useEffect, useState } from 'react';
-import { ChevronDown, LogOut, Search } from 'lucide-react';
+import { ChevronDown, LogOut, Search, User } from 'lucide-react';
 import { logout } from '../../services/AccountService';
 import TextField from '../ui/TextField';
+import SearchBox from '../search/SearchBox';
 
 
 function Header() {
     const nav = useNavigate();
     const location = useLocation();
     const [tab, setTab] = useState('home')
+    const [forcusSearchBar, setForcusSearchBar] = useState(false)
     const [userData, setUserData] = useState({
         username: "",
         email: ""
@@ -17,9 +19,9 @@ function Header() {
     const [isAtTop, setIsAtTop] = useState(true);
     const [isHomePage, setIsHomePage] = useState(true);
 
-    useEffect(()=>{
+    useEffect(() => {
         setIsHomePage(location.pathname === '/')
-    },[location])
+    }, [location])
     useEffect(() => {
         const mainLayout = document.querySelector('.main-container');
         const onScroll = () => {
@@ -32,8 +34,8 @@ function Header() {
     }, []);
 
     useEffect(() => {
-        const username = window.localStorage.getItem("alex_account_username");
-        const email = window.localStorage.getItem("alex_account_email");
+        const username = window.localStorage.getItem("account_username");
+        const email = window.localStorage.getItem("account_email");
         if (username) {
             setUserData({ username: username, email: email });
         }
@@ -47,12 +49,12 @@ function Header() {
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
         <link rel="stylesheet" href="style.css" />
         <title>Travel V</title>
-        <header className={`header-container ${isAtTop && isHomePage? "nav-top" : "nav-scrolled"}`}>
+        <header className={`header-container ${isAtTop && isHomePage ? "nav-top" : "nav-scrolled"}`}>
             <div className="header-left">
                 <a href="/" className="logoname">TRAVEL V</a>
                 <nav className='header-menu'>
                     <a onClick={() => nav('/')} className={tab == 'home' && 'active'}>Home</a>
-                    <a onClick={() => nav('/locations')} className={tab == 'locations' && 'active'}>Locations</a>
+                    <a onClick={() => nav('/locations')} className={tab == 'locations' && 'active'}>Destinations</a>
                     <a onClick={() => nav('/blogs')} className={tab == 'blogs' && 'active'}>Blogs</a>
                     <a href="#" className={tab == 'version' && 'active'}>Tutorial</a>
                     <a href="#" className={tab == 'compare' && 'active'}>About</a>
@@ -64,6 +66,7 @@ function Header() {
                     iconLeft={<Search color='rgba(85, 85, 85, 1)' />}
                     borderRadius={50}
                     placeholder={'search tour, locate, service'}
+                    onClick={() => setForcusSearchBar(true)}
                 />
             </div>
             <div className="header-right">
@@ -84,12 +87,14 @@ function Header() {
                         </div>
                         <div><ChevronDown /></div>
                         <div className='user-dropboxs'>
-                            <div className='user-dropbox-box' onClick={() => logout()}><LogOut color='#CCC'/> Log out</div>
+                            <div className='user-dropbox-box' onClick={() => nav('/me') }><User color='#CCC' /> Account</div>
+                            <div className='user-dropbox-box' onClick={() => logout()}><LogOut color='#CCC' /> Log out</div>
                         </div>
                     </div>
                 }
             </div>
         </header>
+        {forcusSearchBar ? <SearchBox onClose={() => setForcusSearchBar(false)} /> : <></>}
     </>)
 }
 export default Header

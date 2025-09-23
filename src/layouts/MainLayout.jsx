@@ -3,6 +3,7 @@ import Header from '../components/headers/Header'
 import './layout.css'
 import MainFooter from '../components/footers/MainFooter'
 import { useEffect, useState } from 'react';
+import SearchBox from '../components/search/SearchBox';
 
 export function useScrollTop() {
     const [isAtTop, setIsAtTop] = useState(true);

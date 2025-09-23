@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import api from "../../cores/axios";
 import { toast } from "react-toastify";
 import { formatDate, formatEstimatedTime } from "../../services/utils";
+import OutstandingTours from "../../components/tour/OutstandingTours";
 export default function TourDetail() {
     const nav = useNavigate();
     const { id } = useParams();
@@ -20,10 +21,10 @@ export default function TourDetail() {
     const [bookingsInfo, setBookingsInfo] = useState({
         province: '',
         ward: '',
-        address: '',
+        specific_address: '',
         diparture_at: formatDate(new Date()),
-        lat: null,
-        lng: null
+        pickup_lat: null,
+        pickup_lng: null
     })
     const [statesInfo, setStatesInfo] = useState({
         priceInclude: false,
@@ -111,9 +112,9 @@ export default function TourDetail() {
                                 <TextField label={'Specific address'}
                                     placeholder={'Home number, lane number,...'}
                                     borderRadius={5}
-                                    value={bookingsInfo.address}
+                                    value={bookingsInfo.specific_address}
                                     onChange={(e) => {
-                                        setBookingsInfo({ ...bookingsInfo, address: e.target.value });
+                                        setBookingsInfo({ ...bookingsInfo, specific_address: e.target.value });
                                     }}
                                 />
                                 <TextField label={'Start date'}
@@ -213,7 +214,7 @@ export default function TourDetail() {
                             <div className="summary__btns">
                                 <Button value={'Next to booking'}
                                     disable={
-                                        bookingsInfo.address == "" ||
+                                        bookingsInfo.specific_address == "" ||
                                         bookingsInfo.province == "" ||
                                         bookingsInfo.ward == "" ||
                                         !bookingsInfo.diparture_at
@@ -229,46 +230,8 @@ export default function TourDetail() {
                         </div>
                     </div>
                 </div>
-                <div className="outstanding-box">
-                    <div className="box-header">
-                        <div className="box-title">Locations Outstanding</div>
-                        <div className='sorted'>
-                            <label>Sort by</label>
-                            <select>
-                                <option>Date</option>
-                                <option>Month</option>
-                                <option>Year</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="box-items">
-                        <LocationCard title={'Ha Long'}
-                            description={'3 vé trải nghiệm dịch vụ đẳng cấp tại Vịnh Hạ Long'}
-                            imageSrc={'/halong.jpg'}
-                            tourAmount={3}
-                            views={3456546}
-                        />
-                        <LocationCard title={'Lang Ho Chu Tich'}
-                            description={'Viếng thăm lăng Bác là một trong những hoạt động cần thiết nhất khi đến với Hà Nội'}
-                            imageSrc={'/langbac-about.jpg'}
-                            tourAmount={3}
-                            views={7324234}
-
-                        />
-                        <LocationCard title={'Bac Son'}
-                            description={'Dịch vụ đẳng cấp cùng trải nghiệm mới mẻ và cảm giác hòa mình cùng thiên nhiên, cuộc sống bình dị tại Bắc Sơn, được đắm chìm vào phong cảnh hùng vĩ nhưng đầy thơ mộng được dệt nên bởi những thuở rộng bậc thang, và cánh cò trắng muốt'}
-                            imageSrc={'/bacson-about.jpg'}
-                            tourAmount={3}
-                            views={324234}
-                        />
-                        <LocationCard title={'Bac Son'}
-                            description={'Dịch vụ đẳng cấp cùng trải nghiệm mới mẻ và cảm giác hòa mình cùng thiên nhiên, cuộc sống bình dị tại Bắc Sơn, được đắm chìm vào phong cảnh hùng vĩ nhưng đầy thơ mộng được dệt nên bởi những thuở rộng bậc thang, và cánh cò trắng muốt'}
-                            imageSrc={'/bacson-about.jpg'}
-                            tourAmount={3}
-                            views={324234}
-
-                        />
-                    </div>
+                <div style={{ width: "100%" }}>
+                    <OutstandingTours row={4}/>
                 </div>
             </div>
         </div>

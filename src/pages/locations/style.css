@@ -193,3 +193,10 @@
         width: 100%;
     }
 }
+
+.box-items {
+    display: grid;
+    gap: 10px;
+    padding: 10px;
+    grid-template-columns: repeat(5, 1fr);
+}

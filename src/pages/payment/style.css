@@ -1,0 +1,231 @@
+.radio-container {
+    width: 300px;
+    padding: 8px;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #ffffff;
+    /* slate-50 */
+    font-family: sans-serif;
+}
+
+.radio-title {
+    text-transform: capitalize;
+    font-weight: 600;
+    align-self: flex-start;
+    font-size: 15px;
+}
+
+.radio-subtitle {
+    font-size: 10px;
+    align-self: flex-start;
+    color: #6b7280;
+    /* gray-500 */
+    padding-bottom: 4px;
+}
+
+.radio-label {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    border-radius: 12px;
+    padding: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.radio-label:hover {
+    background-color: #e2e8f0;
+    /* slate-200 */
+}
+
+.radio-label:has(input:checked) {
+    border-color: #6366f1;
+    /* indigo-500 */
+    background-color: #eef2ff;
+    /* indigo-50 */
+    color: #4f46e5;
+    /* indigo-900 */
+    font-weight: bold;
+}
+
+.radio-label p {
+    font-weight: 600;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    white-space: nowrap;
+    transform: translate(50px, 20px);
+    top: 4px;
+    left: 8px;
+    opacity: 0;
+    transition: all 0.7s;
+    font-size: 14px;
+}
+
+.radio-label:has(input:checked) p {
+    transform: translate(50px, 0);
+    opacity: 1;
+}
+
+.radio-input {
+    accent-color: #6366f1;
+    /* indigo-500 for checked */
+}
+
+.radio-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    z-index: 10;
+
+    img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.payment-main-container {
+    width: 100%;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    gap: 10px;
+}
+
+.bill-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.125);
+    padding: 10px;
+
+    table {
+        border: 1px solid rgba(0, 0, 0, 0.368);
+        border-radius: 10px;
+        font-size: 15px;
+        width: 100%;
+    }
+
+    tr {
+        border: 1px solid rgba(0, 0, 0, 0.368);
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+    }
+}
+
+.passenger-row-item {
+    background-color: #f6f6f6;
+    width: 100%;
+    padding: 10px;
+    margin: 3px 0px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    &>div {
+        flex: 1;
+        display: grid;
+        align-items: center;
+    }
+}
+
+.confirm-container {
+    position: sticky;
+    top: 100px;
+}
+
+.bookings-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.export-btn {
+    flex: 1;
+    display: flex;
+    background-color: #718ba2;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px rgba(4, 4, 4, 0.148);
+    padding: 10px;
+    height: 40px;
+    position: relative;
+    cursor: pointer;
+    .___title {
+        flex: 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: white;
+        border-right: 2px solid rgb(223, 223, 223);
+    }
+}
+
+.btn-selects {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.btn-select-box {
+    position: absolute;
+    bottom: -100px;
+    z-index: 10;
+    background-color: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #CCC;
+    box-shadow: 2x 2px 8px rgba(0, 0, 0, 0.152);
+    gap: 5px;
+    &>div{
+        padding: 7px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        &:hover{
+            background-color: #e3e3e3;
+
+        }
+    }
+}
+.btn-select-box.show{
+    display: grid;
+}
+.btn-select-box.hide{
+    display: none;
+}
+
+.loader{
+    animation: loader-spin 0.8s infinite;
+}
+@keyframes loader-spin {
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}

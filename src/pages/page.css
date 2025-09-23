@@ -125,6 +125,7 @@
         align-items: center;
         font-size: 15px;
         gap: 10px;
+
         select {
             font-weight: 550;
         }
@@ -138,28 +139,38 @@
     }
 }
 
+.sorted {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    gap: 10px;
+
+    select {
+        font-weight: 550;
+    }
+}
+
 .outstanding-container {
-    width: 75%;
+    width: 100%;
     padding: 50px;
     height: 100%;
 
-    .outstanding-sorted {
-        height: 50px;
-        display: flex;
-        align-items: center;
-        font-size: 15px;
-        gap: 10px;
 
-        select {
-            font-weight: 550;
-        }
-    }
 
     .outstanding-cards {
-        display: flex;
+        display: grid;
         gap: 10px;
-
         width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    }
+}
+
+.outstanding-title {
+    p {
+        font-size: 23px;
+        border-bottom: 3px solid rgb(53, 122, 162);
+        color: rgb(35, 84, 112);
     }
 }
 
@@ -266,13 +277,14 @@
     background: url('../../public/bacson-about.jpg');
 }
 
-.login-with-otherapp-btns{
+.login-with-otherapp-btns {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    label{
+
+    label {
         font-size: 12px;
         width: 100%;
         text-align: center;
@@ -309,31 +321,42 @@
 }
 
 .login-with-facebook-btn {
-  cursor: pointer;
-  color: rgb(252, 252, 252); /* text-zinc-200 */
-  display: flex;
-  gap: 0.5rem; /* gap-2 */
-  align-items: center;
-  background-color: rgb(37, 99, 235); /* bg-blue-600 */
-  padding-left: 1rem;  /* px-4 */
-  padding-right: 1rem;
-  padding-top: 0.5rem; /* py-2 */
-  padding-bottom: 0.5rem;
-  border-radius: 0.5rem; /* rounded-lg */
-  font-weight: 500; /* font-medium */
-  font-size: 13px; /* text-sm */
-  transition: all 0.2s ease-in; /* transition-all ease-in duration-200 */
-  width: 100%;
-  padding: 10px;
-  justify-content: center;
-  svg{
-    width: 24px;
-    fill: white;
-  }
+    cursor: pointer;
+    color: rgb(252, 252, 252);
+    /* text-zinc-200 */
+    display: flex;
+    gap: 0.5rem;
+    /* gap-2 */
+    align-items: center;
+    background-color: rgb(37, 99, 235);
+    /* bg-blue-600 */
+    padding-left: 1rem;
+    /* px-4 */
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    /* py-2 */
+    padding-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    /* rounded-lg */
+    font-weight: 500;
+    /* font-medium */
+    font-size: 13px;
+    /* text-sm */
+    transition: all 0.2s ease-in;
+    /* transition-all ease-in duration-200 */
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+
+    svg {
+        width: 24px;
+        fill: white;
+    }
 }
 
 .login-with-facebook-btn:hover {
-  background-color: rgb(29, 78, 216); /* hover:bg-blue-700 */
+    background-color: rgb(29, 78, 216);
+    /* hover:bg-blue-700 */
 }
 
 
@@ -409,9 +432,11 @@
     align-items: center;
     gap: 4px;
     font-size: 12px;
+
     strong {
         cursor: pointer;
         color: rgb(40, 113, 176);
+
         &:hover {
             text-decoration: underline;
         }
@@ -534,12 +559,6 @@ select {
     font-weight: 550;
 }
 
-.box-items {
-    display: grid;
-    gap: 10px;
-    padding: 10px;
-    grid-template-columns: auto auto auto auto;
-}
 
 .filter-option-elements {
     display: grid;

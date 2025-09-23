@@ -10,7 +10,8 @@ const Button = ({
   color,
   border,
   disable,
-  flex = 1
+  flex = 1,
+  borderRadius
 }) => {
   const button = useRef();
 
@@ -31,7 +32,7 @@ const Button = ({
           border: border || '2px solid rgba(255, 255, 255, 1)1)',
           outline: 'none',
           cursor: disable ? 'not-allowed' : 'pointer',
-          borderRadius: '5px',
+          borderRadius: borderRadius || '5px',
           color: color || 'rgba(75, 128, 160, 1)',
           fontSize: '13px',
           fontWeight: '510',

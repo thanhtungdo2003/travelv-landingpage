@@ -18,7 +18,6 @@ export default function TourCard({
     locate
 }) {
     return (<>
-
         <div className='tour-card'>
             <div className='tour-segment-label'>{segment}</div>
             <img className='tour-card-image' src={imageSrc} />
