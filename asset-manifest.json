@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/travelv-landingpage/static/css/main.874a4b61.css",
-    "main.js": "/travelv-landingpage/static/js/main.f15b6c24.js",
+    "main.css": "/travelv-landingpage/static/css/main.89c5fbd2.css",
+    "main.js": "/travelv-landingpage/static/js/main.c42bc01f.js",
+    "static/js/977.b761c659.chunk.js": "/travelv-landingpage/static/js/977.b761c659.chunk.js",
+    "static/js/732.f0b68464.chunk.js": "/travelv-landingpage/static/js/732.f0b68464.chunk.js",
     "static/media/bavang-about.jpg": "/travelv-landingpage/static/media/bavang-about.a82f77712e3e85908d50.jpg",
     "static/media/ruong_bac_thang.jpg": "/travelv-landingpage/static/media/ruong_bac_thang.f6df340771940dadbcff.jpg",
     "static/media/bacson-about.jpg": "/travelv-landingpage/static/media/bacson-about.9a8fdf50d66214bf7608.jpg",
@@ -9,11 +11,13 @@
     "static/media/langbac-about.jpg": "/travelv-landingpage/static/media/langbac-about.21cb3d69d4d99368e404.jpg",
     "static/media/category-pattern.jpg": "/travelv-landingpage/static/media/category-pattern.e55e4754326f63f25e5b.jpg",
     "index.html": "/travelv-landingpage/index.html",
-    "main.874a4b61.css.map": "/travelv-landingpage/static/css/main.874a4b61.css.map",
-    "main.f15b6c24.js.map": "/travelv-landingpage/static/js/main.f15b6c24.js.map"
+    "main.89c5fbd2.css.map": "/travelv-landingpage/static/css/main.89c5fbd2.css.map",
+    "main.c42bc01f.js.map": "/travelv-landingpage/static/js/main.c42bc01f.js.map",
+    "977.b761c659.chunk.js.map": "/travelv-landingpage/static/js/977.b761c659.chunk.js.map",
+    "732.f0b68464.chunk.js.map": "/travelv-landingpage/static/js/732.f0b68464.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.874a4b61.css",
-    "static/js/main.f15b6c24.js"
+    "static/css/main.89c5fbd2.css",
+    "static/js/main.c42bc01f.js"
   ]
 }
