@@ -20,7 +20,7 @@ import BookingReceipt from "../pages/success/BookingSuccess";
 import PersonalInfo from "../pages/account/AccountSetting";
 const AppRouter = () => {
   return (
-    <Router>
+    <Router basename="/travelv-landingpage">
       <Routes>
         <Route path="/" element={<GenQrProvider><MainLayout /></GenQrProvider>}>
           <Route index element={<TourProvider><Home /></TourProvider>} />
