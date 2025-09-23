@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/travelv-landingpage/static/css/main.89c5fbd2.css",
-    "main.js": "/travelv-landingpage/static/js/main.0730e9a8.js",
+    "main.js": "/travelv-landingpage/static/js/main.c25ab925.js",
     "static/js/977.b761c659.chunk.js": "/travelv-landingpage/static/js/977.b761c659.chunk.js",
     "static/js/732.f0b68464.chunk.js": "/travelv-landingpage/static/js/732.f0b68464.chunk.js",
     "static/media/bavang-about.jpg": "/travelv-landingpage/static/media/bavang-about.a82f77712e3e85908d50.jpg",
@@ -12,12 +12,12 @@
     "static/media/category-pattern.jpg": "/travelv-landingpage/static/media/category-pattern.e55e4754326f63f25e5b.jpg",
     "index.html": "/travelv-landingpage/index.html",
     "main.89c5fbd2.css.map": "/travelv-landingpage/static/css/main.89c5fbd2.css.map",
-    "main.0730e9a8.js.map": "/travelv-landingpage/static/js/main.0730e9a8.js.map",
+    "main.c25ab925.js.map": "/travelv-landingpage/static/js/main.c25ab925.js.map",
     "977.b761c659.chunk.js.map": "/travelv-landingpage/static/js/977.b761c659.chunk.js.map",
     "732.f0b68464.chunk.js.map": "/travelv-landingpage/static/js/732.f0b68464.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.89c5fbd2.css",
-    "static/js/main.0730e9a8.js"
+    "static/js/main.c25ab925.js"
   ]
 }
