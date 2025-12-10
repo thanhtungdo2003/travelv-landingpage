@@ -39,7 +39,7 @@ export default function TourCard({
                 </div>
                 <div className='tour-footer'>
                     <div>{location}</div>
-                    <div><a href={`/tour/${id}`}><Button iconRight={<NotepadText color='rgba(80, 125, 162, 1)' />} value={'Show detail'} /></a></div>
+                    <div><a href={`/travelv-landingpage/tour/${id}`}><Button iconRight={<NotepadText color='rgba(80, 125, 162, 1)' />} value={'Show detail'} /></a></div>
 
                 </div>
             </div>

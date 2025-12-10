@@ -17,7 +17,7 @@ const reactQuillModules = {
     ],
 };
 function BlogForm(props) {
-    const [showState, setShowState] = useState('default');
+    const [showState, setShowState] = useState('minimize');
     const [tags, setTags] = useState([]);
     const { setShowBlogForm, showBlogForm } = useBlog();
 

@@ -229,3 +229,23 @@
         transform: rotate(360deg);
     }
 }
+
+.room-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 8px;
+    margin-bottom: 8px;
+    background-color: #fafafa;
+}
+
+.room-row-item div {
+    font-size: 14px;
+    color: #444;
+}
+
+.room-row-item img {
+    flex-shrink: 0;
+}

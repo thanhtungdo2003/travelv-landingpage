@@ -4,20 +4,33 @@ import TextField from "../ui/TextField";
 import './style.css'
 import ChipTag from "../ui/ChipTag";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import api from "../../cores/axios";
 export default function SearchBox({ onClose }) {
-    const [searchKeyword, setSearchKeyword] = useState('');
     const [tours, setTours] = useState();
     const [destinations, setDestinations] = useState([]);
+    const [searchKeyword, setSearchKeyword] = useState('');
     const [debouncedValue, setDebouncedValue] = useState(searchKeyword);
     const [loading, setLoading] = useState(false);
+    const [searchHistorys, setSearchHistory] = useState([]);
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedValue(searchKeyword);
         }, 300);
         return () => clearTimeout(handler);
     }, [searchKeyword])
+
+    useEffect(() => {
+        const rawHistorys = localStorage.getItem('search_historys');
+        if (rawHistorys) {
+            try {
+                const historys = JSON.parse(rawHistorys);
+                setSearchHistory(historys);
+            } catch {
+                localStorage.removeItem('search_historys');
+            }
+        }
+    }, [])
 
     useEffect(() => {
         if (debouncedValue) {
@@ -49,10 +62,32 @@ export default function SearchBox({ onClose }) {
             })
         }
     }, [debouncedValue])
+
+    const addHistory = () => {
+        if (searchKeyword != '') {
+            const historys = JSON.parse(localStorage.getItem("search_historys")) || [];
+            try {
+                if (!historys.includes(searchKeyword)) {
+                    if (historys.length > 15) {
+                        historys.pop()
+                        historys.unshift(searchKeyword);
+                    } else {
+                        historys.unshift(searchKeyword);
+                    }
+                    localStorage.setItem('search_historys', JSON.stringify(historys))
+                    setSearchHistory([...searchHistorys, ...searchKeyword])
+                }
+            } catch {
+                localStorage.removeItem('search_historys');
+            }
+        }
+    }
+
     return (<>
         <div className="search-box-container" onClick={(e) => {
             if (e.target === e.currentTarget) {
                 onClose();
+
             }
         }}>
             <div className="search-box-main-form">
@@ -61,6 +96,7 @@ export default function SearchBox({ onClose }) {
                         <Search color="#5a5a5aff" />
                     </div>
                     <TextField
+                        maxLength={100}
                         placeholder={'What are you looking for?'}
                         border={'none'}
                         value={searchKeyword}
@@ -75,14 +111,31 @@ export default function SearchBox({ onClose }) {
                     />
                 </div>
                 <div className="chip-tags">
-                    <ChipTag title={'Du lịch Hạ Long'} onRemove={() => { }} />
-                    <ChipTag title={'Du lịch Đà Nẵng'} onRemove={() => { }} />
-                    <ChipTag title={'Du Lịch Miền Nam'} onRemove={() => { }} />
-                    <ChipTag title={'Du Lịch Miền Bắc'} onRemove={() => { }} />
-                    <ChipTag title={'Tour 4 người'} onRemove={() => { }} />
-                    <ChipTag title={'Tour 2 người'} onRemove={() => { }} />
-                    <ChipTag title={'Tour gia đình'} onRemove={() => { }} />
-                    <ChipTag title={'Khuyến mại'} onRemove={() => { }} />
+                    {searchHistorys.map((e, i) => {
+                        return (<ChipTag
+                            backgroundColor="#3e77d3ff"
+                            border="none"
+                            color="white"
+                            iconFill="white"
+                            iconColor="#3267bcff"
+                            title={e}
+                            onClick={() => {
+                                setSearchKeyword(e)
+                            }}
+                            onRemove={() => {
+                                const rawHistorys = localStorage.getItem('search_historys');
+                                if (rawHistorys) {
+                                    try {
+                                        const historys = JSON.parse(rawHistorys);
+                                        const new_his = historys.filter(h => h != e);
+                                        localStorage.setItem("search_historys", JSON.stringify(new_his))
+                                        setSearchHistory(new_his);
+                                    } catch {
+                                        localStorage.removeItem('search_historys');
+                                    }
+                                }
+                            }} />)
+                    })}
                 </div>
                 <div className="results-boxs">
                     <div className="__tours">
@@ -113,7 +166,7 @@ export default function SearchBox({ onClose }) {
                             <>
                                 {tours?.map((e, i) => {
                                     return (<>
-                                        <a href={`/tour/${e.id}`} style={{ textDecoration: "none" }}>
+                                        <a onClick={addHistory} href={`/travelv-landingpage/tour/${e.id}`} style={{ textDecoration: "none" }}>
                                             <div className="result-item">
                                                 <img src={e.thumbnailURL} />
                                                 <div className="result-item-content">
@@ -133,7 +186,7 @@ export default function SearchBox({ onClose }) {
                                 {
                                     destinations?.map((e, i) => {
                                         return (<>
-                                            <a href={`/location/${e.id}`} style={{ textDecoration: "none" }}>
+                                            <a onClick={addHistory} href={`/travelv-landingpage/location/${e.id}`} style={{ textDecoration: "none" }}>
                                                 <div className="result-item">
                                                     <img src={e.thumbnailURL} />
                                                     <div className="result-item-content">

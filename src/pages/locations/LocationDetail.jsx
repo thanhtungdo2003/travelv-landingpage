@@ -35,9 +35,13 @@ export default function LocationDetail() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
-            const data = await res.json();
-            setProvince(data.map(p => { return { name: p.name, codename: p.codename } }));
+            try {
+                const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
+                const data = await res.json();
+                setProvince(data.map(p => { return { name: p.name, codename: p.codename } }));
+            } catch (err) {
+                console.log(err)
+            }
         }
         fetchData();
 
@@ -103,7 +107,7 @@ export default function LocationDetail() {
                     </div>
 
                     <div className="tour-cate-slide">
-                        <img src="/shopping1.jpg" />
+                        <img src={"../shopping1.jpg"} />
                     </div>
                 </div>
 

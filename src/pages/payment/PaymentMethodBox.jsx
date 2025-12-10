@@ -84,7 +84,7 @@ const PaymentMethodBox = ({ onPaymentChange }) => {
             </label>
             <label className="radio-label">
                 <div className="radio-icon-wrapper">
-                    <img src="/momo.png" />
+                    <img src="../momo.png" />
                     <p> Momo </p>
                 </div>
                 <input

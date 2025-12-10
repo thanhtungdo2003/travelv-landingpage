@@ -12,10 +12,12 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { formatDate, getPassDateByYear } from "../../services/utils";
 import api from "../../cores/axios";
+import { getTokenCookie } from "../../services/AccountService";
 
 export default function BookingPage() {
     const location = useLocation();
     const [thisTour, setThisTour] = useState(undefined)
+    const [roomsData, setRoomsData] = useState(null)
     const bookingsInfo = location.state;
     const { id } = useParams();
     const nav = useNavigate();
@@ -34,6 +36,7 @@ export default function BookingPage() {
         province: "",
         ward: "",
         specific_address: "",
+        selected_rooms: [],
         pickup_lat: null,
         pickup_lng: null,
         diparture_at: new Date().toISOString(),
@@ -59,6 +62,9 @@ export default function BookingPage() {
         }).catch((err) => {
             toast.error(err?.status)
         });
+        api.post(`/v1/rooms/get-by-tour/${id}`, {}).then(res => {
+            setRoomsData(res.data);
+        }).catch(err => { })
     }, [])
 
     const increasePassenger = (type) => {
@@ -216,7 +222,6 @@ export default function BookingPage() {
                     </div>
                     <div className="booking-info__passenger">
                         <span>Passengers info</span>
-
                         <div>
                             {bookingsForm.passengers.map((p, i) => (
                                 <div key={i} className="__info__passenger-box">
@@ -269,6 +274,47 @@ export default function BookingPage() {
                             ))}
                         </div>
                     </div>
+                    {/* --- ROOM SELECTION --- */}
+                    <div className="booking-info__rooms">
+                        <span>Select Rooms</span>
+                        <div className="__rooms-list">
+                            {roomsData?.data?.length > 0 ? (
+                                roomsData?.data?.map((room, i) => (
+                                    <div key={i} className="__room-item" onClick={() => {
+                                        setBookingsForm(prev => {
+                                            const updatedRooms = !bookingsForm.selected_rooms.includes(room.id)
+                                                ? [...(prev.selected_rooms || []), room.id]
+                                                : (prev.selected_rooms || []).filter(rid => rid !== room.id);
+                                            return { ...prev, selected_rooms: updatedRooms };
+                                        });
+                                    }}>
+                                        <div className="__room-info">
+                                            <img
+                                                src={room.thumbnailURL || '/default-room.jpg'}
+                                                alt={room.title}
+                                                className="__room-thumb"
+                                            />
+                                            <div className="__room-details">
+                                                <h4>{room.title}</h4>
+                                                <p>Type: {room.type}</p>
+                                                <p style={{ color: "red" }}>Price: {room.price.toLocaleString()}₫</p>
+                                                <p>Status: {room.status}</p>
+                                            </div>
+                                        </div>
+                                        <div className="__room-select">
+                                            <input
+                                                type="checkbox"
+                                                checked={bookingsForm.selected_rooms?.includes(room.id)}
+                                            />
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p style={{ color: '#999', fontSize: 14 }}>No rooms available for this tour.</p>
+                            )}
+                        </div>
+                    </div>
+
                 </div>
                 <div className="booking-main-summary-container">
                     <BookingSummary
@@ -281,8 +327,12 @@ export default function BookingPage() {
                         hasName={bookingsForm.fullname != ''}
                         onCheckOut={() => {
                             console.log(bookingsForm)
-                            api.post('/v1/bookings/create', bookingsForm).then((res) => {
-                                if (res?.data?.id){
+                            api.post('/v1/bookings/create', bookingsForm, {
+                                headers: {
+                                    Authorization: `Bearer ${getTokenCookie()}`
+                                }
+                            }).then((res) => {
+                                if (res?.data?.id) {
                                     nav(`/payment/${res?.data?.id}`)
                                 }
                             }).catch((err) => {

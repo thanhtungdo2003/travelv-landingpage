@@ -5,7 +5,6 @@
     border-radius: 5px;
     overflow: hidden;
     transition-duration: 0.3s;
-
 }
 
 .location-card:hover {
@@ -13,6 +12,8 @@
         transform: scale(1.1);
     }
 }
+
+
 
 .location-card-image {
     transition-duration: 0.3s;

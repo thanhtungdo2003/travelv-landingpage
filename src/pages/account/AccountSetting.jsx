@@ -23,9 +23,13 @@ const PersonalInfo = () => {
     })
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
-            const data = await res.json();
-            setProvince(data);
+            try {
+                const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
+                const data = await res.json();
+                setProvince(data);
+            } catch (err) {
+                console.log(err)
+            }
         }
         fetchData();
     }, [])
@@ -164,8 +168,10 @@ const PersonalInfo = () => {
                                                                 {(e?.status + "").toLocaleUpperCase()}
                                                             </div>
                                                             {e.status == 'Unpaid' ? <>
-                                                                <a href={`/payment/${e.id}`}>To payment</a>
-                                                            </> : <div style={{ fontSize: 12, color: "#30a76cff" }}>Thank for used our service</div>}
+                                                                <a href={`/travelv-landingpage/payment/${e.id}`}>To payment</a>
+                                                            </> : <div style={{ fontSize: 12, color: "#30a76cff" }}>Thank for used our service <p style={{ cursor: "pointer", color: "#4764e2ff", textDecoration: "underline" }} onClick={() => {
+                                                                nav(`/receipt/${e.id}`);
+                                                            }}>Show detail</p></div>}
                                                         </div>
                                                     </td>
                                                 </tr>

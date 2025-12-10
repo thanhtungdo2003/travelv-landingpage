@@ -1,10 +1,11 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import './header.css'
 import { useEffect, useState } from 'react';
-import { ChevronDown, LogOut, Search, User } from 'lucide-react';
+import { ChevronDown, LogOut, Menu, Search, User } from 'lucide-react';
 import { logout } from '../../services/AccountService';
 import TextField from '../ui/TextField';
 import SearchBox from '../search/SearchBox';
+import Button from '../ui/Button';
 
 
 function Header() {
@@ -12,6 +13,7 @@ function Header() {
     const location = useLocation();
     const [tab, setTab] = useState('home')
     const [forcusSearchBar, setForcusSearchBar] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
     const [userData, setUserData] = useState({
         username: "",
         email: ""
@@ -49,17 +51,21 @@ function Header() {
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
         <link rel="stylesheet" href="style.css" />
         <title>Travel V</title>
+        {forcusSearchBar ? <SearchBox onClose={() => setForcusSearchBar(false)} /> : <></>}
+
         <header className={`header-container ${isAtTop && isHomePage ? "nav-top" : "nav-scrolled"}`}>
             <div className="header-left">
-                <a href="/" className="logoname">TRAVEL V</a>
-                <nav className='header-menu'>
-                    <a onClick={() => nav('/')} className={tab == 'home' && 'active'}>Home</a>
-                    <a onClick={() => nav('/locations')} className={tab == 'locations' && 'active'}>Destinations</a>
-                    <a onClick={() => nav('/blogs')} className={tab == 'blogs' && 'active'}>Blogs</a>
-                    <a href="#" className={tab == 'version' && 'active'}>Tutorial</a>
-                    <a href="#" className={tab == 'compare' && 'active'}>About</a>
-                </nav>
-
+                <Button className={'menu-button'} onClick={() => setShowMenu(true)} backgroundColor={'transparent'} iconLeft={<Menu color='#6d6d6dff' strokeWidth={1} size={50} />} />
+                <a href="/travelv-landingpage/" className="logoname">TRAVEL V</a>
+                <div className={`header-menu ${showMenu ? 'show' : 'hide'}`} onClick={() => setShowMenu(false)}>
+                    <div className='menus'>
+                        <a onClick={() => nav('/')} className={tab == 'home' && 'active'}>Home</a>
+                        <a onClick={() => nav('/locations')} className={tab == 'locations' && 'active'}>Destinations</a>
+                        <a onClick={() => nav('/blogs')} className={tab == 'blogs' && 'active'}>Blogs</a>
+                        <a href="#" className={tab == 'version' && 'active'}>Tutorial</a>
+                        <a href="#" className={tab == 'compare' && 'active'}>About</a>
+                    </div>
+                </div>
             </div>
             <div>
                 <TextField
@@ -87,14 +93,13 @@ function Header() {
                         </div>
                         <div><ChevronDown /></div>
                         <div className='user-dropboxs'>
-                            <div className='user-dropbox-box' onClick={() => nav('/me') }><User color='#CCC' /> Account</div>
+                            <div className='user-dropbox-box' onClick={() => nav('/me')}><User color='#CCC' /> Account</div>
                             <div className='user-dropbox-box' onClick={() => logout()}><LogOut color='#CCC' /> Log out</div>
                         </div>
                     </div>
                 }
             </div>
         </header>
-        {forcusSearchBar ? <SearchBox onClose={() => setForcusSearchBar(false)} /> : <></>}
     </>)
 }
 export default Header

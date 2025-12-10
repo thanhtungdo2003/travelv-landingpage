@@ -11,6 +11,7 @@ import { useState } from 'react';
 import OutstandingTours from '../components/tour/OutstandingTours';
 import OutstandingDestinations from '../components/location/OutstandingDestination';
 
+
 function Home() {
     const nav = useNavigate();
     const { tours, setTours } = useTour();

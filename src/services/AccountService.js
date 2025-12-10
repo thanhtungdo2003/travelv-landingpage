@@ -1,9 +1,9 @@
 import axios from 'axios';
-axios.defaults.baseURL = "http://127.0.0.1:8000/api/v1";
+import api from '../cores/axios';
 
 export const sendVerifyEmail = async (email) => {
   try {
-    const response = await axios.post(`/email/send-verify-mail/${email}`);
+    const response = await api.post(`/v1/email/send-verify-mail/${email}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -12,7 +12,7 @@ export const sendVerifyEmail = async (email) => {
 }
 export const verifyEmail = async (token) => {
   try {
-    const response = await axios.post(`/email/verify-mail/${token}`);
+    const response = await api.post(`/v1/email/verify-mail/${token}`);
     return response.data;
   } catch (err) {
     console.log(err);
@@ -22,7 +22,7 @@ export const verifyEmail = async (token) => {
 
 export const createOrder = async (method, pack) => {
   try {
-    const res = await axios.post(`/payment/${method}/create`, { pack }, {
+    const res = await api.post(`/v1/payment/${method}/create`, { pack }, {
       headers: {
         Authorization: `Bearer ${getTokenCookie()}`
       }
@@ -35,7 +35,7 @@ export const createOrder = async (method, pack) => {
 
 export const update = async (data) => {
   try {
-    const res = await axios.patch(`/user/update`, data, {
+    const res = await api.patch(`/v1/user/update`, data, {
       headers: {
         Authorization: `Bearer ${getTokenCookie()}`
       }
@@ -47,7 +47,7 @@ export const update = async (data) => {
 }
 export const login = async (email, password) => {
   try {
-    const res = await axios.post(`/user/login`, { email: email, password: password });
+    const res = await api.post(`/v1/user/login`, { email: email, password: password });
     return res.data;
   } catch (err) {
     return err
@@ -56,7 +56,7 @@ export const login = async (email, password) => {
 
 export const getByEmail = async (email) => {
   try {
-    const res = await axios.get(`/user/get-by-email/${email}`);
+    const res = await api.get(`/v1/user/get-by-email/${email}`);
     return res.data;
   } catch (err) {
     return err
@@ -75,7 +75,7 @@ export const logout = () => {
   window.localStorage.removeItem('account_username');
   window.localStorage.removeItem('account_id');
   setTimeout(() => {
-    window.open('/', '_parent')
+    window.open('/travelv-landingpage/', '_parent')
   }, 200);
 }
 

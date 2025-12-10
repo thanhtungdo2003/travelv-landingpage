@@ -24,14 +24,14 @@ const AppRouter = () => {
       <Routes>
         <Route path="/" element={<GenQrProvider><MainLayout /></GenQrProvider>}>
           <Route index element={<TourProvider><Home /></TourProvider>} />
-          <Route path="/blogs" element={<BlogProvider><BlogsPage /></BlogProvider>} />
-          <Route path="/locations" element={<LocationsPage />} />
-          <Route path="/location/:id" element={<LocationDetail />} />
-          <Route path="/tour/:id" element={<TourDetail />} />
-          <Route path="/booking/:id" element={<BookingPage />} />
-          <Route path="/payment/:id" element={<PaymentPage />} />
-          <Route path="/receipt/:id" element={<BookingReceipt />} />
-          <Route path="/me" element={<PersonalInfo />} />
+          <Route path="blogs" element={<BlogProvider><BlogsPage /></BlogProvider>} />
+          <Route path="locations" element={<LocationsPage />} />
+          <Route path="location/:id" element={<LocationDetail />} />
+          <Route path="tour/:id" element={<TourDetail />} />
+          <Route path="booking/:id" element={<BookingPage />} />
+          <Route path="payment/:id" element={<PaymentPage />} />
+          <Route path="receipt/:id" element={<BookingReceipt />} />
+          <Route path="me" element={<PersonalInfo />} />
         </Route>
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignUpPage />} />

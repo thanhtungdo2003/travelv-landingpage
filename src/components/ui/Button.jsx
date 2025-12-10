@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import './ui.css'
 const Button = ({
+  className,
   type,
   value,
   onClick,
@@ -11,7 +12,9 @@ const Button = ({
   border,
   disable,
   flex = 1,
-  borderRadius
+  borderRadius,
+  onFocus,
+  onBlur
 }) => {
   const button = useRef();
 
@@ -24,8 +27,10 @@ const Button = ({
   return (
     <>
       <div
-        className='travelv-btns'
+        className={className ?? 'travelv-btns'}
         onClick={handleClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
         style={{
           opacity: disable ? 0.5 : 1,
           backgroundColor: backgroundColor || 'rgba(255, 255, 255, 1)',

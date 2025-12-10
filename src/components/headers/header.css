@@ -5,13 +5,35 @@
 }
 
 .header-menu {
-    display: flex;
     gap: 10px;
-    padding: 10px;
-    justify-content: center;
+}
+
+@media only screen and (min-width: 1024px) {
+    header {
+        padding: 1rem 9%;
+
+    }
+
+    .menus {
+        display: flex;
+        gap: 10px;
+
+        a {
+            font-size: 17px;
+        }
+    }
+
+    .header-menu {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+
+    }
+}
+
+.menus {
     a {
-        color: rgb(255, 255, 255) !important;
-        font-size: 17px;
+        color: rgb(75, 75, 75) !important;
         text-decoration: none;
         cursor: pointer;
     }
@@ -21,9 +43,47 @@
     }
 }
 
+@media only screen and (max-width: 900px) {
+    .header-menu.show {
+        display: grid;
+    }
+
+    .header-menu.hide {
+        display: none;
+    }
+
+    .menus {
+        display: grid;
+        gap: 10px;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+        width: 20%;
+        left: 0px;
+        box-shadow: 0px 0px 100px rgba(0, 0, 0, 0.158);
+
+        a {
+            font-size: 13px;
+        }
+    }
+
+    .header-menu {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        background-color: rgba(6, 6, 6, 0.077);
+        backdrop-filter: blur(1px);
+
+    }
+}
+
 .header-container.nav-scrolled {
     background-color: white;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.158);
+
     .header-menu>a {
         color: rgb(86, 86, 86) !important;
     }

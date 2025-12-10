@@ -13,7 +13,7 @@ export default function LocationCard({
     isHover,
 }) {
     return (<>
-        <a href={`/location/${id}`}>
+        <a href={`/travelv-landingpage/location/${id}`}>
             <div className='location-card'>
                 <img className='location-card-image' src={imageSrc} />
                 <div className='location-card-content'>

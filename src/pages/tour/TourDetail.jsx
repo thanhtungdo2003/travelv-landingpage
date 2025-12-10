@@ -12,6 +12,7 @@ import api from "../../cores/axios";
 import { toast } from "react-toastify";
 import { formatDate, formatEstimatedTime } from "../../services/utils";
 import OutstandingTours from "../../components/tour/OutstandingTours";
+import ScheduleCalendar from "../../components/schedule/Schedule";
 export default function TourDetail() {
     const nav = useNavigate();
     const { id } = useParams();
@@ -33,11 +34,17 @@ export default function TourDetail() {
         contacts: true,
     })
     const [desShow, showDes] = useState(false);
+    const [selectedSchedule, setSelectedSchedule] = useState(null);
+
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
-            const data = await res.json();
-            setProvince(data);
+            try {
+                const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
+                const data = await res.json();
+                setProvince(data);
+            } catch (err) {
+                console.log(err)
+            }
         }
         fetchData();
 
@@ -68,10 +75,10 @@ export default function TourDetail() {
                         <img src={thisTour?.thumbnailURL} />
                     </div>
                     <div className="more-thumbnails">
-                        <img src="/vanhoa1.jpg" />
-                        <img src="/phongcanh1.jpg" />
-                        <img src="/halong.jpg" />
-                        <img src="/kientruc1.jpg" />
+                        <img src="../vanhoa1.jpg" />
+                        <img src="../phongcanh1.jpg" />
+                        <img src="../halong.jpg" />
+                        <img src="../kientruc1.jpg" />
                     </div>
                 </div>
                 <div className="tour__content">
@@ -117,15 +124,26 @@ export default function TourDetail() {
                                         setBookingsInfo({ ...bookingsInfo, specific_address: e.target.value });
                                     }}
                                 />
-                                <TextField label={'Start date'}
-                                    type={'date'}
-                                    min={new Date().toISOString().split('T')[0]}
-                                    borderRadius={5}
-                                    value={bookingsInfo.diparture_at}
-                                    onChange={(e) => {
-                                        setBookingsInfo({ ...bookingsInfo, diparture_at: formatDate(e.target.value) });
-                                    }}
-                                />
+                                <div style={{}}>
+                                    <label style={{}}>Chọn ngày khởi hành</label>
+                                    <ScheduleCalendar
+                                        schedules={thisTour?.schedules || []}
+                                        selectedDate={selectedSchedule?.start_date}
+                                        onChange={(schedule) => {
+                                            const newSchedule = { ...schedule };
+                                            const date = new Date(newSchedule.start_date);
+                                            date.setDate(date.getDate() + 1);
+                                            newSchedule.start_date = date.toISOString();
+                                            setSelectedSchedule(newSchedule);
+                                            setBookingsInfo((prev) => ({
+                                                ...prev,
+                                                diparture_at: newSchedule.start_date,
+                                                schedule_id: newSchedule.id,
+                                            }));
+                                        }}
+
+                                    />
+                                </div>
                             </div>
                             <div className="tour__option-mappicker">
                                 <label>Map picker (optional)</label>
@@ -217,7 +235,7 @@ export default function TourDetail() {
                                         bookingsInfo.specific_address == "" ||
                                         bookingsInfo.province == "" ||
                                         bookingsInfo.ward == "" ||
-                                        !bookingsInfo.diparture_at
+                                        !selectedSchedule
                                     }
                                     border={'1px solid #5e9cb8ff'}
                                     backgroundColor={'#ecececff'}
@@ -231,7 +249,7 @@ export default function TourDetail() {
                     </div>
                 </div>
                 <div style={{ width: "100%" }}>
-                    <OutstandingTours row={4}/>
+                    <OutstandingTours row={4} />
                 </div>
             </div>
         </div>

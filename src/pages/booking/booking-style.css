@@ -1,0 +1,370 @@
+.booking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.booking-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.back-button {
+    position: absolute;
+    left: 0;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #495057;
+}
+
+.booking-title {
+    color: #2d3748;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Booking Steps */
+.booking-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.booking-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    min-width: 120px;
+}
+
+.step-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    background: #e9ecef;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.booking-step.active .step-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.booking-step span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.booking-step.active span {
+    color: #667eea;
+}
+
+.step-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e9ecef;
+    margin-top: 8px;
+}
+
+.booking-step.active .step-indicator {
+    background: #667eea;
+}
+
+.step-connector {
+    flex: 1;
+    height: 2px;
+    background: #e9ecef;
+    margin: 0 20px;
+    position: relative;
+    top: -25px;
+}
+
+/* Main Container */
+.booking-main-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    align-items: start;
+}
+
+.booking-forms {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Form Sections */
+.form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e9ecef;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.section-header h3 {
+    margin: 0;
+    color: #2d3748;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.section-header svg {
+    color: #667eea;
+}
+
+/* Form Grid */
+.form-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.form-input {
+    width: 100%;
+}
+
+.phone-input-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Passenger Quantity */
+.passenger-quantity-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.passenger-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.passenger-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.passenger-label {
+    display: block;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.passenger-age {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quantity-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    background: #667eea;
+    border-color: #667eea;
+    color: white;
+}
+
+.quantity-display {
+    min-width: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: #2d3748;
+}
+
+/* Passenger Cards */
+.passengers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.passenger-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.passenger-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.passenger-number {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.passenger-type-badge {
+    background: #667eea;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.passenger-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.passenger-input {
+    width: 100%;
+}
+
+.passenger-select {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.passenger-select label {
+    font-weight: 500;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.passenger-select select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 0.875rem;
+}
+
+.passenger-select select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Summary Container */
+.booking-summary-container {
+    position: sticky;
+    top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .booking-main-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .booking-summary-container {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .booking-container {
+        padding: 16px;
+    }
+    
+    .booking-steps {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .step-connector {
+        display: none;
+    }
+    
+    .passenger-fields {
+        grid-template-columns: 1fr;
+    }
+    
+    .passenger-type {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+    
+    .quantity-controls {
+        justify-content: center;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.passenger-card {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Hover Effects */
+.form-section:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+}
+
+.passenger-card:hover {
+    border-color: #667eea;
+    transition: border-color 0.3s ease;
+}

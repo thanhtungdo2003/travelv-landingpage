@@ -21,6 +21,7 @@ export default function PaymentPage() {
     const [showExportSelect, setShowExportSelect] = useState(false);
     const [createPayLoading, setCreatePayLoading] = useState(false);
     const [province, setProvince] = useState([]);
+    const [bookingRooms, setBookingRooms] = useState([]);
     const [thisBooking, setThisBooking] = useState({
         id: "",
         phone: "",
@@ -69,9 +70,13 @@ export default function PaymentPage() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
-            const data = await res.json();
-            setProvince(data);
+            try {
+                const res = await fetch('https://provinces.open-api.vn/api/v2/?depth=2')
+                const data = await res.json();
+                setProvince(data);
+            } catch (err) {
+                console.log(err)
+            }
         }
         fetchData();
         api.get(`/v1/bookings/get/${id}`).then((res) => {
@@ -80,6 +85,11 @@ export default function PaymentPage() {
             toast.error(err.status)
         })
     }, []);
+    useEffect(() => {
+        api.post(`/v1/bookings/get-booking-rooms/${id}`, {}).then(res => {
+            setBookingRooms(res.data?.data);
+        }).catch(err => { })
+    }, [thisBooking])
 
     const exportPDF = () => {
         const input = document.getElementById("booking-table");
@@ -177,7 +187,7 @@ export default function PaymentPage() {
                         </tr>
                         <tr>
                             <th>Tour</th>
-                            <td><a href={`/tour/${thisBooking?.tour.id}`} target="_blank">{thisBooking?.tour.title}</a></td>
+                            <td><a href={`/travelv-landingpage/tour/${thisBooking?.tour.id}`} target="_blank">{thisBooking?.tour.title}</a></td>
                         </tr>
                         <tr>
                             <th>Passengers</th>
@@ -194,6 +204,34 @@ export default function PaymentPage() {
                                         </div>
                                     </div>
                                 })}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Hotel Rooms</th>
+                            <td>
+                                {bookingRooms?.length > 0 ? (
+                                    bookingRooms?.map((br, i) => (
+                                        <div key={i} className="room-row-item">
+                                            <div>
+                                                <div><strong>Room:</strong> {br.room?.title || 'N/A'}</div>
+                                                <div><strong>Type:</strong> {br.room?.type || 'N/A'}</div>
+                                                <div><strong>Check-in:</strong> {formatDate(br.check_in)}</div>
+                                                <div><strong>Check-out:</strong> {formatDate(br.check_out)}</div>
+                                                <div><strong>Price/Night:</strong> {br.price_per_night?.toLocaleString()} VND</div>
+                                                <div><strong>Total:</strong> {br.total_room_price?.toLocaleString()} VND</div>
+                                            </div>
+                                            {br.room?.thumbnailURL && (
+                                                <img
+                                                    src={br.room.thumbnailURL}
+                                                    alt={br.room?.title}
+                                                    style={{ width: 100, height: 70, borderRadius: 8, objectFit: "cover", marginLeft: 10 }}
+                                                />
+                                            )}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p style={{ color: "#888", fontSize: 14 }}>No hotel rooms booked.</p>
+                                )}
                             </td>
                         </tr>
                         <tr>

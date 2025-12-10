@@ -18,6 +18,7 @@ export default function ChipTag({
             className="chiptag"
             onClick={onClick}
             style={{
+                maxWidth: "49%",
                 display: "inline-flex",
                 alignItems: "center",
                 padding: "4px 8px",
@@ -33,15 +34,21 @@ export default function ChipTag({
             }}
         >
             {icon && <span className="chiptag-icon">{icon}</span>}
-            <div>{title}</div>
+            <div style={{
+                width: "90%",
+                whiteSpace: 'nowrap',
+                overflow:"hidden",
+                textOverflow:"ellipsis"
+            }}>{title}</div>
             {onRemove && (
                 <div
+
                     className="chiptag-remove-btn"
                     onClick={(e) => {
                         e.stopPropagation();
                         onRemove();
                     }}
-                    style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+                    style={{ cursor: "pointer", display: "flex", alignItems: "center", justifyContent:"center" }}
                 >
                     <XCircle color={iconColor} fill={iconFill} size={20} />
                 </div>
