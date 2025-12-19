@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import OutstandingTours from "../../components/tour/OutstandingTours";
 import PageInput from "../../components/ui/PageInput";
 export default function LocationsPage() {
-    const [categoryName, setCategoryName] = useState('GREAT DESTINATIONS');
+    const [categoryName, setCategoryName] = useState('ĐIỂM ĐẾN TUYỆT VỜI');
     const [categoryImage, setCategoryImage] = useState('./langbac-about.jpg');
     const [newDestinations, setNewDestinations] = useState(undefined);
     const [filter, setFilter] = useState({
@@ -31,81 +31,81 @@ export default function LocationsPage() {
                 <div className="categories-box">
                     <div className="categories">
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('GREAT DESTINATIONS');
+                            setCategoryName('ĐIỂM ĐẾN TUYỆT VỜI');
                             setCategoryImage('./langbac-about.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><List size={40} /></div>
-                                <div className="category-name">All</div>
+                                <div className="category-name">Tất cả</div>
                             </div>
                         </div>
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('SCENIC SPOT');
+                            setCategoryName('DANH THẮNG');
                             setCategoryImage('./halong-about.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><Mountain size={40} /></div>
-                                <div className="category-name">Scenic Spot</div>
+                                <div className="category-name">Danh thắng</div>
                             </div>
                         </div>
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('FESTIVAL');
+                            setCategoryName('LỄ HỘI');
                             setCategoryImage('./lehoi1.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><PersonStanding size={40} /></div>
-                                <div className="category-name">Festival</div>
+                                <div className="category-name">Lễ hội</div>
                             </div>
                         </div>
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('HISTORY');
+                            setCategoryName('LỊCH SỬ');
                             setCategoryImage('lichsu.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><ClockFading size={40} /></div>
-                                <div className="category-name">History</div>
+                                <div className="category-name">Lịch sử</div>
                             </div>
                         </div>
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('Architeture');
+                            setCategoryName('KIẾN TRÚC');
                             setCategoryImage('kientruc1.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><BrickWall size={40} /></div>
-                                <div className="category-name">Architecture</div>
+                                <div className="category-name">Kiến trúc</div>
                             </div>
                         </div>
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('EXPERIENTIAL ACTIVITES');
+                            setCategoryName('HOẠT ĐỘNG TRẢI NGHIỆM');
                             setCategoryImage('hoatdong1.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><Bike size={40} /></div>
-                                <div className="category-name">Experiential activities</div>
+                                <div className="category-name">Hoạt động trải nghiệm</div>
                             </div>
                         </div>
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('CUISINE');
+                            setCategoryName('ẨM THỰC');
                             setCategoryImage('amthuc1.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><ConciergeBell size={40} /></div>
-                                <div className="category-name">Cuisine</div>
+                                <div className="category-name">Ẩm thực</div>
                             </div>
                         </div>
                         <div className="category-checkbox" onClick={() => {
-                            setCategoryName('CULTURE');
+                            setCategoryName('VĂN HÓA');
                             setCategoryImage('vanhoa1.jpg')
                         }}>
                             <div className="category-checkbox-content">
                                 <div className="category-icon"><Church size={40} /></div>
-                                <div className="category-name">Culture</div>
+                                <div className="category-name">Văn hóa</div>
                             </div>
                         </div>
                     </div>
                     <div className="category-choosed-name">
                         <h1>{categoryName}</h1>
-                        <span>Experience culture, architecture, cuisine and so much more</span>
+                        <span>Trải nghiệm văn hóa, kiến trúc, ẩm thực và nhiều hơn thế nữa</span>
                     </div>
                     <div className="categories-image">
                         <img src={categoryImage} />
@@ -113,14 +113,14 @@ export default function LocationsPage() {
                 </div>
                 <div className="outstanding-box">
                     <div className="box-header">
-                        <div className="box-title">Locations recommended for you</div>
+                        <div className="box-title">Địa điểm được đề xuất cho bạn</div>
                         <div className='sorted'>
-                            <label>Sort by</label>
+                            <label>Sắp xếp theo</label>
                             <div>
                                 <select>
-                                    <option>Date</option>
-                                    <option>Month</option>
-                                    <option>Year</option>
+                                    <option>Ngày</option>
+                                    <option>Tháng</option>
+                                    <option>Năm</option>
                                 </select>
                             </div>
                         </div>

@@ -59,11 +59,9 @@ function Header() {
                 <a href="/travelv-landingpage/" className="logoname">TRAVEL V</a>
                 <div className={`header-menu ${showMenu ? 'show' : 'hide'}`} onClick={() => setShowMenu(false)}>
                     <div className='menus'>
-                        <a onClick={() => nav('/')} className={tab == 'home' && 'active'}>Home</a>
-                        <a onClick={() => nav('/locations')} className={tab == 'locations' && 'active'}>Destinations</a>
+                        <a onClick={() => nav('/')} className={tab == 'home' && 'active'}>Trang chủ</a>
+                        <a onClick={() => nav('/locations')} className={tab == 'locations' && 'active'}>Điểm đến</a>
                         <a onClick={() => nav('/blogs')} className={tab == 'blogs' && 'active'}>Blogs</a>
-                        <a href="#" className={tab == 'version' && 'active'}>Tutorial</a>
-                        <a href="#" className={tab == 'compare' && 'active'}>About</a>
                     </div>
                 </div>
             </div>
@@ -71,7 +69,7 @@ function Header() {
                 <TextField
                     iconLeft={<Search color='rgba(85, 85, 85, 1)' />}
                     borderRadius={50}
-                    placeholder={'search tour, locate, service'}
+                    placeholder={'tìm tour, điểm đến, dịch vụ'}
                     onClick={() => setForcusSearchBar(true)}
                 />
             </div>
@@ -84,7 +82,7 @@ function Header() {
                 {userData.username == "" ? <div onClick={() => {
                     nav('/signin')
                 }} className="user-icon">
-                    Sign in
+                    Đăng nhập
                 </div> :
                     <div className='user-menu-select'>
                         <div>
@@ -93,8 +91,8 @@ function Header() {
                         </div>
                         <div><ChevronDown /></div>
                         <div className='user-dropboxs'>
-                            <div className='user-dropbox-box' onClick={() => nav('/me')}><User color='#CCC' /> Account</div>
-                            <div className='user-dropbox-box' onClick={() => logout()}><LogOut color='#CCC' /> Log out</div>
+                            <div className='user-dropbox-box' onClick={() => nav('/me')}><User color='#CCC' /> Tài khoản</div>
+                            <div className='user-dropbox-box' onClick={() => logout()}><LogOut color='#CCC' /> Đăng xuất</div>
                         </div>
                     </div>
                 }

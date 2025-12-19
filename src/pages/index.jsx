@@ -43,16 +43,16 @@ function Home() {
         <section className="home home-section">
             <section class="curvy-section top-slide">
                 <div>
-                    <h1>Viet Nam Discovery</h1>
-                    <p>Beautiful destinations await you.</p>
+                    <h1>Khám Phá Việt Nam</h1>
+                    <p>Những điểm đến tuyệt đẹp đang chờ đón bạn.</p>
                 </div>
             </section>
         </section>
         <div className='about-travel-vietnam'>
             <div className='about-travel-vietnam-content'>
-                <h1>The Rich and Diverse Tourism Culture of Vietnam</h1>
+                <h1>Nền Văn Hóa Du Lịch Phong Phú và Đa Dạng Của Việt Nam</h1>
                 <p>
-                    Vietnam’s tourism culture is a colorful mosaic, where centuries-old traditions blend with modern charm. In the North, Hanoi and Ha Long Bay showcase elegant temples, vibrant street food, and serene mountain villages. The Central coast dazzles with Hue’s imperial cuisine and Da Nang’s beaches, while the South bursts with Saigon’s energy, the Mekong Delta’s floating markets, and endless tropical flavors.
+                    Văn hóa du lịch Việt Nam là một bức tranh khảm màu sắc, nơi truyền thống hàng trăm năm hòa quyện với nét quyến rũ hiện đại. Ở miền Bắc, Hà Nội và Vịnh Hạ Long khoe sắc với những ngôi đền thanh lịch, ẩm thực đường phố sôi động và những ngôi làng miền núi thanh bình. Miền Trung lấp lánh với ẩm thực hoàng gia Huế và những bãi biển Đà Nẵng, trong khi miền Nam tràn đầy năng lượng Sài Gòn, chợ nổi đồng bằng sông Cửu Long và hương vị nhiệt đới vô tận.
                 </p>
             </div>
             <div className='about-travel-vietnam-imgs'>
@@ -91,18 +91,18 @@ function Home() {
                     </clipPath>
                 </svg>
                 <div>
-                    <h4>{'>'} See all</h4>
-                    <h1>HOT TOUR</h1>
-                    <p>Recently selected tours.</p>
+                    <h4>{'>'} Xem tất cả</h4>
+                    <h1>TOUR NỔI BẬT</h1>
+                    <p>Các tour được lựa chọn gần đây.</p>
                 </div>
             </div>
         </section>
         <section className="home-section">
             <div class="curvy-section location-outstanding">
                 <div className='show-more-container'>
-                    <h4>{'>'} See all</h4>
-                    <h1>Featured Destinations</h1>
-                    <p>Most popular destinations.</p>
+                    <h4>{'>'} Xem tất cả</h4>
+                    <h1>Điểm Đến Nổi Bật</h1>
+                    <p>Những điểm đến phổ biến nhất.</p>
                 </div>
                 <div style={{width:'100%'}}>
                     <OutstandingDestinations/>
@@ -121,7 +121,7 @@ function Home() {
                     className="text-center mb-5"
                     style={{ color: "#ffffff" }}
                 >
-                    Service Request
+                    Yêu Cầu Dịch Vụ
                 </h2>
                 <div
                     className="service-form-container"
@@ -136,7 +136,7 @@ function Home() {
                                     display: "block",
                                 }}
                             >
-                                Your Name
+                                Họ và Tên
                             </label>
                             <input
                                 type="text"
@@ -182,7 +182,7 @@ function Home() {
                                     display: "block",
                                 }}
                             >
-                                Service Type
+                                Loại Dịch Vụ
                             </label>
                             <select
                                 className="form-control"
@@ -195,10 +195,10 @@ function Home() {
                                     width: "100%",
                                 }}
                             >
-                                <option value="">Select a service</option>
-                                <option value="qr-generation">QR Code Generation</option>
-                                <option value="qr-custom">QR Code Customization</option>
-                                <option value="qr-analytics">QR Code Analytics</option>
+                                <option value="">Chọn dịch vụ</option>
+                                <option value="qr-generation">Tạo Mã QR</option>
+                                <option value="qr-custom">Tùy Chỉnh Mã QR</option>
+                                <option value="qr-analytics">Phân Tích Mã QR</option>
                             </select>
                         </div>
                         <div className="form-group mb-4">
@@ -209,7 +209,7 @@ function Home() {
                                     display: "block",
                                 }}
                             >
-                                Message
+                                Tin Nhắn
                             </label>
                             <textarea
                                 className="form-control"
@@ -238,7 +238,7 @@ function Home() {
                                 margin: "0 auto",
                             }}
                         >
-                            Submit Request
+                            Gửi Yêu Cầu
                         </button>
                     </form>
                 </div>
